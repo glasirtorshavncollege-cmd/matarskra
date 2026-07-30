@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="refresh" content="1800">
+
   <title>Matskrá á Glasi</title>
+
   <style>
     :root {
       --bg: #eef2f4;
@@ -13,142 +15,253 @@
       --muted: #60727a;
       --accent: #006b7c;
       --accent-soft: #d9edf0;
-      --shadow: 0 12px 30px rgba(15, 37, 46, .10);
+      --shadow: 0 12px 30px rgba(15, 37, 46, 0.10);
     }
-    * { box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 8% 8%, rgba(0,107,124,.12), transparent 28%),
+        radial-gradient(
+          circle at 8% 8%,
+          rgba(0, 107, 124, 0.12),
+          transparent 28%
+        ),
         linear-gradient(135deg, #f7f9fa 0%, var(--bg) 100%);
     }
+
     main {
+      width: 100%;
       height: 100%;
-      padding: clamp(24px, 3vw, 60px);
+      padding: 45px;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      gap: clamp(18px, 2vw, 34px);
+      gap: 28px;
     }
-    header { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
-    h1 { margin: 0; font-size: clamp(42px, 5vw, 86px); line-height: .95; letter-spacing: -.035em; }
-    .subtitle { margin-top: 12px; font-size: clamp(18px, 1.65vw, 30px); color: var(--muted); }
-    .time { text-align: right; color: var(--muted); font-size: clamp(17px, 1.35vw, 25px); white-space: nowrap; }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 68px;
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      font-size: 27px;
+      color: var(--muted);
+    }
+
+    .time {
+      text-align: right;
+      color: var(--muted);
+      font-size: 22px;
+      white-space: nowrap;
+    }
+
     .menu {
       min-height: 0;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: clamp(12px, 1.4vw, 26px);
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(5, minmax(0, 1fr));
+      gap: 20px;
     }
+
     .card {
+      min-height: 0;
       background: var(--panel);
-      border-radius: clamp(16px, 1.5vw, 28px);
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      padding: clamp(20px, 2vw, 36px);
+      padding: 28px 34px;
       display: flex;
       flex-direction: column;
-      min-width: 0;
+      justify-content: center;
       border: 3px solid transparent;
     }
-    .card.today { border-color: var(--accent); transform: translateY(-5px); }
+
+    .card.today {
+      border-color: var(--accent);
+    }
+
     .day {
-      margin: 0 0 clamp(16px, 1.8vw, 30px);
-      font-size: clamp(22px, 2vw, 36px);
+      margin: 0 0 14px;
+      font-size: 31px;
       color: var(--accent);
       line-height: 1;
     }
+
     .today .day::after {
       content: "Í DAG";
       display: inline-block;
-      margin-left: 10px;
-      padding: 5px 8px;
+      margin-left: 12px;
+      padding: 6px 10px;
       border-radius: 999px;
       background: var(--accent-soft);
-      font-size: .42em;
+      font-size: 14px;
       vertical-align: middle;
-      letter-spacing: .08em;
+      letter-spacing: 0.08em;
     }
+
     .dish {
       margin: 0;
-      font-size: clamp(22px, 2.15vw, 42px);
+      font-size: 36px;
       font-weight: 700;
       line-height: 1.16;
       overflow-wrap: anywhere;
     }
-    footer { display: flex; justify-content: space-between; gap: 24px; color: var(--muted); font-size: clamp(14px, 1.1vw, 20px); }
-    .error { grid-column: 1 / -1; align-self: center; text-align: center; font-size: clamp(28px, 3vw, 52px); }
 
-    @media (max-aspect-ratio: 4/3) {
-      html, body { overflow: auto; }
-      main { min-height: 100%; height: auto; }
-      .menu { grid-template-columns: 1fr; }
-      .card { min-height: 150px; }
-      header { align-items: start; }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .error {
+      align-self: center;
+      text-align: center;
+      font-size: 42px;
     }
   </style>
 </head>
+
 <body>
-<main>
-  <header>
-    <div>
-      <h1>Matskrá á Glasi</h1>
-      <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
-    </div>
-    <div class="time" id="clock"></div>
-  </header>
+  <main>
+    <header>
+      <div>
+        <h1>Matskrá á Glasi</h1>
+        <div class="subtitle">
+          Døgurði frá kl. 11:15 til 12:30
+        </div>
+      </div>
 
-  <section class="menu" id="menu" aria-live="polite"></section>
+      <div class="time" id="clock"></div>
+    </header>
 
-  <footer>
-    <span>Væl gagnist</span>
-    <span id="updated"></span>
-  </footer>
-</main>
-<script>
-  const dayIndex = { "Mánadag": 1, "Týsdag": 2, "Mikudag": 3, "Hósdag": 4, "Fríggjadag": 5 };
+    <section
+      class="menu"
+      id="menu"
+      aria-live="polite">
+    </section>
 
-  function updateClock() {
-    const now = new Date();
-    const date = new Intl.DateTimeFormat('fo-FO', { weekday: 'long', day: 'numeric', month: 'long' }).format(now);
-    const time = new Intl.DateTimeFormat('fo-FO', { hour: '2-digit', minute: '2-digit' }).format(now);
-    document.getElementById('clock').textContent = `${date} · ${time}`;
-  }
+    <footer>
+      <span>Væl gagnist</span>
+      <span id="updated"></span>
+    </footer>
+  </main>
 
-  async function loadMenu() {
-    const menu = document.getElementById('menu');
-    try {
-      const response = await fetch(`menu.json?v=${Date.now()}`, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      const today = new Date().getDay();
-      menu.innerHTML = '';
-      for (const item of data.days) {
-        const card = document.createElement('article');
-        card.className = 'card' + (dayIndex[item.day] === today ? ' today' : '');
-        const heading = document.createElement('h2');
-        heading.className = 'day';
-        heading.textContent = item.day;
-        const dish = document.createElement('p');
-        dish.className = 'dish';
-        dish.textContent = item.dish || 'Eingin rættur er skrásettur';
-        card.append(heading, dish);
-        menu.appendChild(card);
-      }
-      if (data.updated_at) {
-        const when = new Date(data.updated_at);
-        document.getElementById('updated').textContent = `Dagført ${new Intl.DateTimeFormat('fo-FO', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }).format(when)}`;
-      }
-    } catch (error) {
-      console.error(error);
-      menu.innerHTML = '<div class="error">Matskráin fekst ikki fram.</div>';
+  <script>
+    const dayIndex = {
+      "Mánadag": 1,
+      "Týsdag": 2,
+      "Mikudag": 3,
+      "Hósdag": 4,
+      "Fríggjadag": 5
+    };
+
+    function updateClock() {
+      const now = new Date();
+
+      const date = new Intl.DateTimeFormat("fo-FO", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      }).format(now);
+
+      const time = new Intl.DateTimeFormat("fo-FO", {
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(now);
+
+      document.getElementById("clock").textContent =
+        `${date} · ${time}`;
     }
-  }
 
-  updateClock();
-  loadMenu();
-  setInterval(updateClock, 30000);
-  setInterval(loadMenu, 15 * 60 * 1000);
-</script>
+    async function loadMenu() {
+      const menu = document.getElementById("menu");
+
+      try {
+        const response = await fetch(
+          `menu.json?v=${Date.now()}`,
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const today = new Date().getDay();
+
+        menu.innerHTML = "";
+
+        for (const item of data.days) {
+          const card = document.createElement("article");
+
+          card.className =
+            "card" +
+            (dayIndex[item.day] === today ? " today" : "");
+
+          const heading = document.createElement("h2");
+          heading.className = "day";
+          heading.textContent = item.day;
+
+          const dish = document.createElement("p");
+          dish.className = "dish";
+          dish.textContent =
+            item.dish || "Eingin rættur er skrásettur";
+
+          card.append(heading, dish);
+          menu.appendChild(card);
+        }
+
+        if (data.updated_at) {
+          const when = new Date(data.updated_at);
+
+          document.getElementById("updated").textContent =
+            `Dagført ${
+              new Intl.DateTimeFormat("fo-FO", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+              }).format(when)
+            }`;
+        }
+      } catch (error) {
+        console.error(error);
+
+        menu.innerHTML =
+          '<div class="error">Matskráin fekst ikki fram.</div>';
+      }
+    }
+
+    updateClock();
+    loadMenu();
+
+    setInterval(updateClock, 30000);
+    setInterval(loadMenu, 15 * 60 * 1000);
+  </script>
 </body>
 </html>
