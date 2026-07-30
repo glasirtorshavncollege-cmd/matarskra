@@ -1,11 +1,26 @@
 {
   "source": "https://www.glasir.fo/um-skulan/kantinan-a-glasi/",
-  "updated_at": "2026-07-30T13:00:00Z",
+  "updated_at": "2026-07-30T13:52:16Z",
   "days": [
-    {"day": "Mánadag", "dish": "Eingin rættur er í dag"},
-    {"day": "Týsdag", "dish": "Eingin rættur er í dag"},
-    {"day": "Mikudag", "dish": "Eingin rættur er í dag"},
-    {"day": "Hósdag", "dish": "Eingin rættur er í dag"},
-    {"day": "Fríggjadag", "dish": "Eingin rættur er í dag"}
+    {
+      "day": "Mánadag",
+      "dish": "Testrættur 1"
+    },
+    {
+      "day": "Týsdag",
+      "dish": "Testrættur 2"
+    },
+    {
+      "day": "Mikudag",
+      "dish": "Testrættur 3"
+    },
+    {
+      "day": "Hósdag",
+      "dish": "Testrættur 4"
+    },
+    {
+      "day": "Fríggjadag",
+      "dish": "Testrættur 5"
+    }
   ]
 }
