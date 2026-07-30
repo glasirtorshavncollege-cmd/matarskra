@@ -28,7 +28,7 @@ jobs:
           pip install requests beautifulsoup4
 
       - name: Heinta matskránna
-        run: python update_menu.py
+        run: python scripts/update_menu.py
 
       - name: Goym broytingar
         run: |
