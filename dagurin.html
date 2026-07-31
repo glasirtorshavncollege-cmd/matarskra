@@ -1,99 +1,644 @@
 <!doctype html>
 <html lang="fo">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="refresh" content="900">
-<title>Dagsins rættur á Glasi</title>
-<style>
-:root{--dark:#005a46;--green:#0b8a64;--text:#111816}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{font-family:Arial,Helvetica,sans-serif;background:#f8fbf9;color:var(--text)}
-.stage{position:relative;width:100vw;height:100vh;min-width:1073px;min-height:1916px;overflow:hidden;background:linear-gradient(145deg,#fff 0%,#f6faf7 100%)}
-.leaf-top,.leaf-bottom{position:absolute;right:18px;width:190px;opacity:.22}
-.leaf-top{top:20px} .leaf-bottom{bottom:-15px;transform:scaleX(-1)}
-main{position:relative;z-index:2;width:100%;height:100%;padding:54px 66px 48px;display:grid;grid-template-rows:180px 1fr 34px;gap:28px}
-header{display:flex;justify-content:space-between;align-items:flex-start}
-h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.045em}
-.subtitle{margin-top:18px;color:var(--green);font-size:29px}
-.clock{display:flex;align-items:center;gap:14px;color:var(--dark);font-size:24px;padding-top:18px}
-.clock svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.4}
-.card{min-height:0;background:rgba(255,255,255,.97);border-radius:28px;box-shadow:0 14px 34px rgba(0,70,52,.13);display:grid;grid-template-columns:22px 320px 1fr;align-items:center;overflow:hidden}
-.stripe{height:100%;background:linear-gradient(180deg,#18a077,#005a46)}
-.icon-area{display:flex;justify-content:center;align-items:center}
-.icon-disc{width:228px;height:228px;border-radius:50%;background:#eef7f2;display:flex;align-items:center;justify-content:center}
-.icon-disc img{width:100%;height:100%;object-fit:contain;display:block}
-.content{padding:50px 58px 50px 0}
-.day-row{display:flex;align-items:center;gap:22px;margin-bottom:34px}
-.badge{background:var(--green);color:#fff;border-radius:999px;padding:12px 22px;font-size:27px;font-weight:700}
-.day{margin:0;color:var(--dark);font-size:58px;line-height:1}
-.dish{margin:0;font-size:88px;line-height:1.05;font-weight:700;letter-spacing:-.03em;overflow-wrap:anywhere}
-footer{display:flex;justify-content:flex-end;color:var(--green);font-size:17px}
-</style>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta http-equiv="refresh" content="900">
+
+  <title>Dagsins rættur á Glasi</title>
+
+  <style>
+    :root {
+      --dark: #005a46;
+      --green: #0b8a64;
+      --text: #111816;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #f8fbf9;
+    }
+
+    .stage {
+      position: relative;
+
+      width: 100vw;
+      height: 100vh;
+      min-width: 1073px;
+      min-height: 1916px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff 0%,
+          #f6faf7 100%
+        );
+    }
+
+    .leaf-top,
+    .leaf-bottom {
+      position: absolute;
+      right: 18px;
+      width: 190px;
+      opacity: 0.22;
+    }
+
+    .leaf-top {
+      top: 20px;
+    }
+
+    .leaf-bottom {
+      bottom: -15px;
+      transform: scaleX(-1);
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      height: 100%;
+      padding: 54px 66px 48px;
+
+      display: grid;
+      grid-template-rows: 180px 1fr 34px;
+      gap: 28px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    h1 {
+      margin: 0;
+
+      color: var(--dark);
+      font-size: 74px;
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+
+    .subtitle {
+      margin-top: 18px;
+
+      color: var(--green);
+      font-size: 29px;
+    }
+
+    .clock {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      padding-top: 18px;
+
+      color: var(--dark);
+      font-size: 24px;
+      white-space: nowrap;
+    }
+
+    .clock svg {
+      width: 28px;
+      height: 28px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+    }
+
+    .card {
+      position: relative;
+      min-height: 0;
+
+      overflow: hidden;
+
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 28px;
+
+      box-shadow:
+        0 14px 34px
+        rgba(0, 70, 52, 0.13);
+    }
+
+    .stripe {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+      width: 22px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #18a077,
+          #005a46
+        );
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      padding: 70px 70px 65px 90px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+    .icon-disc {
+      width: 300px;
+      height: 300px;
+      margin-bottom: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-disc img {
+      display: block;
+
+      width: 300px;
+      height: 300px;
+
+      object-fit: contain;
+    }
+
+    .day-row {
+      margin-bottom: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 12px 22px;
+      border-radius: 999px;
+
+      background: var(--green);
+      color: #ffffff;
+
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .day {
+      margin: 0;
+
+      color: var(--dark);
+      font-size: 58px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .dish {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+
+      font-size: 82px;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+
+      text-align: center;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+    }
+
+    footer {
+      display: flex;
+      justify-content: flex-end;
+
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .error {
+      color: var(--dark);
+      font-size: 44px;
+      font-weight: 700;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-<div class="stage">
-<div class="leaf-top"><svg viewBox="0 0 180 300" aria-hidden="true">
-<g fill="none" stroke="#7fb69f" stroke-width="3">
-<path d="M90 295 C88 210 100 120 125 18"/>
-<path d="M102 235 C70 212 50 188 38 162"/>
-<path d="M112 175 C142 148 160 120 168 92"/>
-<path d="M119 112 C92 92 78 70 70 46"/>
-</g>
-<g fill="#b7d7c8">
-<ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
-<ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
-<ellipse cx="80" cy="58" rx="27" ry="13" transform="rotate(34 80 58)"/>
-<ellipse cx="100" cy="230" rx="29" ry="14" transform="rotate(-24 100 230)"/>
-</g></svg></div>
-<div class="leaf-bottom"><svg viewBox="0 0 180 300" aria-hidden="true">
-<g fill="none" stroke="#7fb69f" stroke-width="3">
-<path d="M90 295 C88 210 100 120 125 18"/>
-<path d="M102 235 C70 212 50 188 38 162"/>
-<path d="M112 175 C142 148 160 120 168 92"/>
-<path d="M119 112 C92 92 78 70 70 46"/>
-</g>
-<g fill="#b7d7c8">
-<ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
-<ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
-<ellipse cx="80" cy="58" rx="27" ry="13" transform="rotate(34 80 58)"/>
-<ellipse cx="100" cy="230" rx="29" ry="14" transform="rotate(-24 100 230)"/>
-</g></svg></div>
-<main>
-<header>
-<div><h1>Dagsins rættur</h1><div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div></div>
-<div class="clock">
-<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/></svg>
-<span id="dateText"></span><span>|</span><strong id="timeText"></strong>
-</div>
-</header>
-<section class="card" id="content">
-<div class="stripe"></div>
-<div class="icon-area"><div class="icon-disc"><img src="today-icon.png" alt=""></div></div>
-<div class="content"><div style="font-size:42px;color:#005a46">Lesur matskránna…</div></div>
-</section>
-<footer><span id="updated"></span></footer>
-</main>
-</div>
-<script>
-var weekdays={1:"Mánadag",2:"Týsdag",3:"Mikudag",4:"Hósdag",5:"Fríggjadag"};
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];})}
-function updateClock(){var n=new Date();document.getElementById("dateText").textContent=new Intl.DateTimeFormat("fo-FO",{weekday:"long",day:"numeric",month:"long"}).format(n);document.getElementById("timeText").textContent=new Intl.DateTimeFormat("fo-FO",{hour:"2-digit",minute:"2-digit"}).format(n);}
-function render(day,dish){
-  document.querySelector(".content").innerHTML=
-    '<div class="day-row"><span class="badge">Í DAG</span><h2 class="day">'+esc(day)+'</h2></div>'+
-    '<p class="dish">'+esc(dish)+'</p>';
-}
-function loadMenu(){
-fetch("menu.json?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(function(data){
-var name=weekdays[new Date().getDay()];
-if(!name){render("Vikuskifti","Eingin matskrá er í dag");}
-else{var item=null;for(var i=0;i<data.days.length;i++){if(data.days[i].day===name){item=data.days[i];break;}}render(name,item&&item.dish?item.dish:"Eingin rættur er skrásettur");}
-if(data.updated_at){var w=new Date(data.updated_at);document.getElementById("updated").textContent="Dagført "+new Intl.DateTimeFormat("fo-FO",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(w);}
-}).catch(function(e){console.error(e);document.querySelector(".content").innerHTML='<div style="font-size:42px;color:#005a46">Matskráin fekst ikki fram.</div>';})
-}
-updateClock();loadMenu();setInterval(updateClock,30000);setInterval(loadMenu,15*60*1000);
-</script>
+  <div class="stage">
+
+    <div class="leaf-top">
+      <svg viewBox="0 0 180 300" aria-hidden="true">
+        <g
+          fill="none"
+          stroke="#7fb69f"
+          stroke-width="3"
+        >
+          <path d="M90 295 C88 210 100 120 125 18"/>
+          <path d="M102 235 C70 212 50 188 38 162"/>
+          <path d="M112 175 C142 148 160 120 168 92"/>
+          <path d="M119 112 C92 92 78 70 70 46"/>
+        </g>
+
+        <g fill="#b7d7c8">
+          <ellipse
+            cx="54"
+            cy="167"
+            rx="26"
+            ry="13"
+            transform="rotate(38 54 167)"
+          />
+
+          <ellipse
+            cx="154"
+            cy="102"
+            rx="29"
+            ry="14"
+            transform="rotate(-40 154 102)"
+          />
+
+          <ellipse
+            cx="80"
+            cy="58"
+            rx="27"
+            ry="13"
+            transform="rotate(34 80 58)"
+          />
+
+          <ellipse
+            cx="100"
+            cy="230"
+            rx="29"
+            ry="14"
+            transform="rotate(-24 100 230)"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <div class="leaf-bottom">
+      <svg viewBox="0 0 180 300" aria-hidden="true">
+        <g
+          fill="none"
+          stroke="#7fb69f"
+          stroke-width="3"
+        >
+          <path d="M90 295 C88 210 100 120 125 18"/>
+          <path d="M102 235 C70 212 50 188 38 162"/>
+          <path d="M112 175 C142 148 160 120 168 92"/>
+          <path d="M119 112 C92 92 78 70 70 46"/>
+        </g>
+
+        <g fill="#b7d7c8">
+          <ellipse
+            cx="54"
+            cy="167"
+            rx="26"
+            ry="13"
+            transform="rotate(38 54 167)"
+          />
+
+          <ellipse
+            cx="154"
+            cy="102"
+            rx="29"
+            ry="14"
+            transform="rotate(-40 154 102)"
+          />
+
+          <ellipse
+            cx="80"
+            cy="58"
+            rx="27"
+            ry="13"
+            transform="rotate(34 80 58)"
+          />
+
+          <ellipse
+            cx="100"
+            cy="230"
+            rx="29"
+            ry="14"
+            transform="rotate(-24 100 230)"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <main>
+      <header>
+        <div>
+          <h1>Dagsins rættur</h1>
+
+          <div class="subtitle">
+            Døgurði frá kl. 11:15 til 12:30
+          </div>
+        </div>
+
+        <div class="clock">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="16"
+              rx="2"
+            />
+
+            <path d="M8 3v4M16 3v4M3 10h18"/>
+
+            <path
+              d="M7 14h2
+                 M11 14h2
+                 M15 14h2
+                 M7 18h2
+                 M11 18h2"
+            />
+          </svg>
+
+          <span id="dateText"></span>
+          <span>|</span>
+          <strong id="timeText"></strong>
+        </div>
+      </header>
+
+      <section
+        class="card"
+        id="content"
+        aria-live="polite"
+      >
+        <div class="stripe"></div>
+
+        <div class="content">
+          <div class="error">
+            Lesur matskránna…
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span id="updated"></span>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    var weekdays = {
+      1: "Mánadag",
+      2: "Týsdag",
+      3: "Mikudag",
+      4: "Hósdag",
+      5: "Fríggjadag"
+    };
+
+    var iconVersion = "20260731-6";
+
+    function escapeHtml(value) {
+      return String(value).replace(
+        /[&<>"']/g,
+        function(character) {
+          return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#39;"
+          }[character];
+        }
+      );
+    }
+
+    function updateClock() {
+      var now = new Date();
+
+      var weekDayNames = [
+        "sunnudagur",
+        "mánadagur",
+        "týsdagur",
+        "mikudagur",
+        "hósdagur",
+        "fríggjadagur",
+        "leygardagur"
+      ];
+
+      var monthNames = [
+        "januar",
+        "februar",
+        "mars",
+        "apríl",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ];
+
+      var dateText =
+        weekDayNames[now.getDay()] +
+        " " +
+        now.getDate() +
+        ". " +
+        monthNames[now.getMonth()];
+
+      var hours =
+        String(now.getHours()).padStart(
+          2,
+          "0"
+        );
+
+      var minutes =
+        String(now.getMinutes()).padStart(
+          2,
+          "0"
+        );
+
+      document.getElementById(
+        "dateText"
+      ).textContent = dateText;
+
+      document.getElementById(
+        "timeText"
+      ).textContent =
+        hours + "." + minutes;
+    }
+
+    function renderContent(dayName, dishText) {
+      var content =
+        document.getElementById("content");
+
+      content.innerHTML =
+        '<div class="stripe"></div>' +
+
+        '<div class="content">' +
+
+          '<div class="icon-disc">' +
+            '<img ' +
+              'src="today-icon.png?v=' +
+              iconVersion +
+              '" ' +
+              'alt="">' +
+          '</div>' +
+
+          '<div class="day-row">' +
+
+            '<span class="badge">' +
+              'Í DAG' +
+            '</span>' +
+
+            '<h2 class="day">' +
+              escapeHtml(dayName) +
+            '</h2>' +
+
+          '</div>' +
+
+          '<p class="dish">' +
+            escapeHtml(dishText) +
+          '</p>' +
+
+        '</div>';
+    }
+
+    function loadMenu() {
+      fetch(
+        "menu.json?v=" + Date.now(),
+        {
+          cache: "no-store"
+        }
+      )
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error(
+              "HTTP " + response.status
+            );
+          }
+
+          return response.json();
+        })
+
+        .then(function(data) {
+          var todayName =
+            weekdays[new Date().getDay()];
+
+          if (!todayName) {
+            renderContent(
+              "Vikuskifti",
+              "Eingin matskrá er í dag"
+            );
+          } else {
+            var item = null;
+
+            for (
+              var i = 0;
+              i < data.days.length;
+              i++
+            ) {
+              if (
+                data.days[i].day ===
+                todayName
+              ) {
+                item = data.days[i];
+                break;
+              }
+            }
+
+            var dishText =
+              item && item.dish
+                ? item.dish
+                : "Eingin rættur er skrásettur";
+
+            renderContent(
+              todayName,
+              dishText
+            );
+          }
+
+          if (data.updated_at) {
+            var updated =
+              new Date(data.updated_at);
+
+            document.getElementById(
+              "updated"
+            ).textContent =
+              "Dagført " +
+              new Intl.DateTimeFormat(
+                "fo-FO",
+                {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit"
+                }
+              ).format(updated);
+          }
+        })
+
+        .catch(function(error) {
+          console.error(error);
+
+          document.getElementById(
+            "content"
+          ).innerHTML =
+            '<div class="stripe"></div>' +
+
+            '<div class="content">' +
+
+              '<div class="error">' +
+                'Matskráin fekst ikki fram.' +
+              '</div>' +
+
+            '</div>';
+        });
+    }
+
+    updateClock();
+    loadMenu();
+
+    setInterval(
+      updateClock,
+      30000
+    );
+
+    setInterval(
+      loadMenu,
+      15 * 60 * 1000
+    );
+  </script>
 </body>
 </html>
