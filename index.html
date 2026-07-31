@@ -41,8 +41,8 @@ h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.04
 .card:nth-child(3) .stripe{background:#1ca27f}
 .card:nth-child(4) .stripe{background:#005a46}
 .card:nth-child(5) .stripe{background:#8bc53e}
-.icon-disc{width:78px;height:78px;border-radius:50%;background:#eef7f2;display:flex;align-items:center;justify-content:center}
-.icon-disc svg{width:46px;height:46px;stroke:var(--dark);fill:none;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.icon-disc{width:78px;height:78px;display:flex;align-items:center;justify-content:center}
+.icon-disc img{display:block;width:78px;height:78px;object-fit:contain}
 .day-wrap{display:flex;align-items:center;gap:12px;min-width:0;white-space:nowrap}
 .day{margin:0;color:var(--dark);font-size:34px;line-height:1;white-space:nowrap}
 .card:nth-child(2) .day,.card:nth-child(5) .day{color:#5c9f20}
@@ -94,13 +94,13 @@ footer{display:flex;justify-content:flex-end;color:var(--green);font-size:17px}
 </div>
 <script>
 var dayIndex={"Mánadag":1,"Týsdag":2,"Mikudag":3,"Hósdag":4,"Fríggjadag":5};
-var icons=[`<svg viewBox="0 0 64 64"><path d="M14 34h36c0 10-7 16-18 16S14 44 14 34Z"/><path d="M18 53h28"/><path d="M23 28c-4-5 4-7 0-14M32 28c-4-5 4-7 0-14M41 28c-4-5 4-7 0-14"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M32 54V24"/><path d="M32 31C21 31 14 24 14 14c11 0 18 7 18 17Z"/><path d="M32 41c11 0 18-7 18-17-11 0-18 7-18 17Z"/><path d="M32 24c0-10 5-15 12-20 2 10-3 17-12 20Z"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M8 32c11-12 25-16 40-7l8-7v28l-8-7C33 48 19 44 8 32Z"/><circle cx="43" cy="29" r="2.2" fill="#005a46" stroke="none"/><path d="M14 32h13"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M13 42h38"/><path d="M18 42c2-14 9-22 23-22s21 8 23 22" transform="translate(-9 0)"/><path d="M32 15v5"/><circle cx="32" cy="12" r="3"/><path d="M11 49h42"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M13 35h38c-3 12-10 18-19 18s-16-6-19-18Z"/><path d="M20 34c0-6 4-10 10-10 3 0 5 1 7 4 2-4 5-7 10-7 6 0 10 4 10 10"/><path d="M25 24c-2-6 1-10 5-13M40 23c0-6 3-10 7-13"/></svg>`];
+var icons=["menu-icon-1.png","menu-icon-2.png","menu-icon-3.png","menu-icon-4.png","menu-icon-5.png"];
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];})}
 function updateClock(){var n=new Date();document.getElementById("dateText").textContent=new Intl.DateTimeFormat("fo-FO",{weekday:"long",day:"numeric",month:"long"}).format(n);document.getElementById("timeText").textContent=new Intl.DateTimeFormat("fo-FO",{hour:"2-digit",minute:"2-digit"}).format(n);}
 function loadMenu(){
 fetch("menu.json?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(function(data){
 var menu=document.getElementById("menu"),today=new Date().getDay();menu.innerHTML="";
-for(var i=0;i<data.days.length;i++){var item=data.days[i],card=document.createElement("article");card.className="card"+(dayIndex[item.day]===today?" today":"");card.innerHTML='<div class="stripe"></div><div class="icon-disc">'+icons[i]+'</div><div class="day-wrap"><h2 class="day">'+esc(item.day)+'</h2><span class="badge">Í DAG</span></div><p class="dish">'+esc(item.dish||"Eingin rættur er skrásettur")+'</p>';menu.appendChild(card);}
+for(var i=0;i<data.days.length;i++){var item=data.days[i],card=document.createElement("article");card.className="card"+(dayIndex[item.day]===today?" today":"");card.innerHTML='<div class="stripe"></div><div class="icon-disc"><img src="'+icons[i]+'" alt=""></div><div class="day-wrap"><h2 class="day">'+esc(item.day)+'</h2><span class="badge">Í DAG</span></div><p class="dish">'+esc(item.dish||"Eingin rættur er skrásettur")+'</p>';menu.appendChild(card);}
 if(data.updated_at){var w=new Date(data.updated_at);document.getElementById("updated").textContent="Dagført "+new Intl.DateTimeFormat("fo-FO",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(w);}
 }).catch(function(e){console.error(e);document.getElementById("menu").innerHTML='<div style="font-size:42px;color:#005a46;text-align:center">Matskráin fekst ikki fram.</div>';})
 }
