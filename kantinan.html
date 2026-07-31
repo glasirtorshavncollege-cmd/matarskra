@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="refresh" content="900">
+
   <title>Matskrá á Glasi</title>
 
   <style>
@@ -33,12 +34,16 @@
 
     .stage {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      min-width: 1916px;
-      min-height: 1073px;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-      background: linear-gradient(145deg, #ffffff 0%, #f6faf7 100%);
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff 0%,
+          #f6faf7 100%
+        );
     }
 
     .leaf-top,
@@ -61,6 +66,7 @@
     main {
       position: relative;
       z-index: 2;
+
       width: 100%;
       height: 100%;
       padding: 34px 54px 28px;
@@ -78,6 +84,7 @@
 
     h1 {
       margin: 0;
+
       color: var(--dark);
       font-size: 66px;
       line-height: 0.95;
@@ -86,6 +93,7 @@
 
     .subtitle {
       margin-top: 12px;
+
       color: var(--green);
       font-size: 27px;
     }
@@ -94,7 +102,9 @@
       display: flex;
       align-items: center;
       gap: 13px;
+
       padding-top: 10px;
+
       color: var(--dark);
       font-size: 24px;
       white-space: nowrap;
@@ -103,20 +113,23 @@
     .clock svg {
       width: 28px;
       height: 28px;
+
       fill: none;
       stroke: currentColor;
       stroke-width: 2.4;
     }
 
     .menu {
+      min-height: 0;
+
       display: flex;
       flex-direction: column;
       gap: 14px;
-      min-height: 0;
     }
 
     .card {
       position: relative;
+
       flex: 1 1 0;
       min-height: 0;
 
@@ -126,10 +139,14 @@
       column-gap: 14px;
 
       overflow: hidden;
+
       background: rgba(255, 255, 255, 0.97);
       border: 3px solid transparent;
       border-radius: 18px;
-      box-shadow: 0 10px 24px rgba(0, 70, 52, 0.11);
+
+      box-shadow:
+        0 10px 24px
+        rgba(0, 70, 52, 0.11);
     }
 
     .card.today {
@@ -142,44 +159,78 @@
       height: 100%;
     }
 
-    .card:nth-child(1) .stripe { background: #59b7a6; }
-    .card:nth-child(2) .stripe { background: #79b92f; }
-    .card:nth-child(3) .stripe { background: #1ca27f; }
-    .card:nth-child(4) .stripe { background: #005a46; }
-    .card:nth-child(5) .stripe { background: #8bc53e; }
+    .card:nth-child(1) .stripe {
+      background: #59b7a6;
+    }
+
+    .card:nth-child(2) .stripe {
+      background: #79b92f;
+    }
+
+    .card:nth-child(3) .stripe {
+      background: #1ca27f;
+    }
+
+    .card:nth-child(4) .stripe {
+      background: #005a46;
+    }
+
+    .card:nth-child(5) .stripe {
+      background: #8bc53e;
+    }
 
     .icon-disc {
       width: 70px;
       height: 70px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       overflow: visible;
     }
 
     .icon-disc img {
       display: block;
+
       width: 70px;
       height: 70px;
+
       object-fit: contain;
       transform-origin: center;
     }
 
-    .card:nth-child(1) .icon-disc img { transform: scale(1.8); }
-    .card:nth-child(2) .icon-disc img { transform: scale(1.05); }
-    .card:nth-child(3) .icon-disc img { transform: scale(1.65); }
-    .card:nth-child(4) .icon-disc img { transform: scale(1.55); }
-    .card:nth-child(5) .icon-disc img { transform: scale(1.55); }
+    .card:nth-child(1) .icon-disc img {
+      transform: scale(1.8);
+    }
+
+    .card:nth-child(2) .icon-disc img {
+      transform: scale(1.05);
+    }
+
+    .card:nth-child(3) .icon-disc img {
+      transform: scale(1.65);
+    }
+
+    .card:nth-child(4) .icon-disc img {
+      transform: scale(1.55);
+    }
+
+    .card:nth-child(5) .icon-disc img {
+      transform: scale(1.55);
+    }
 
     .day-wrap {
       display: flex;
       align-items: center;
+
       min-width: 0;
       white-space: nowrap;
     }
 
     .day {
       margin: 0;
+
       color: var(--dark);
       font-size: 34px;
       line-height: 1;
@@ -193,6 +244,7 @@
 
     .badge {
       display: none;
+
       position: absolute;
       top: 10px;
       left: 38px;
@@ -200,6 +252,7 @@
 
       padding: 8px 15px;
       border-radius: 999px;
+
       background: var(--green);
       color: #ffffff;
 
@@ -217,9 +270,11 @@
     .dish {
       margin: 0;
       padding-right: 32px;
+
       font-size: 36px;
       font-weight: 500;
       line-height: 1.12;
+
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
@@ -228,6 +283,7 @@
     footer {
       display: flex;
       justify-content: flex-end;
+
       color: var(--green);
       font-size: 16px;
     }
@@ -245,6 +301,7 @@
           <path d="M112 175 C142 148 160 120 168 92"/>
           <path d="M119 112 C92 92 78 70 70 46"/>
         </g>
+
         <g fill="#b7d7c8">
           <ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
           <ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
@@ -262,6 +319,7 @@
           <path d="M112 175 C142 148 160 120 168 92"/>
           <path d="M119 112 C92 92 78 70 70 46"/>
         </g>
+
         <g fill="#b7d7c8">
           <ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
           <ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
@@ -275,7 +333,10 @@
       <header>
         <div>
           <h1>Matskrá á Glasi</h1>
-          <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
+
+          <div class="subtitle">
+            Døgurði frá kl. 11:15 til 12:30
+          </div>
         </div>
 
         <div class="clock">
@@ -291,7 +352,11 @@
         </div>
       </header>
 
-      <section class="menu" id="menu" aria-live="polite"></section>
+      <section
+        class="menu"
+        id="menu"
+        aria-live="polite"
+      ></section>
 
       <footer>
         <span id="updated"></span>
@@ -316,7 +381,7 @@
       "menu-icon-5.png"
     ];
 
-    var iconVersion = "20260731-7";
+    var iconVersion = "20260731-8";
 
     function escapeHtml(value) {
       return String(value).replace(
@@ -368,10 +433,15 @@
         ". " +
         months[now.getMonth()];
 
-      var hours = String(now.getHours()).padStart(2, "0");
-      var minutes = String(now.getMinutes()).padStart(2, "0");
+      var hours =
+        String(now.getHours()).padStart(2, "0");
 
-      document.getElementById("dateText").textContent = dateText;
+      var minutes =
+        String(now.getMinutes()).padStart(2, "0");
+
+      document.getElementById("dateText").textContent =
+        dateText;
+
       document.getElementById("timeText").textContent =
         hours + "." + minutes;
     }
@@ -385,22 +455,33 @@
       )
         .then(function(response) {
           if (!response.ok) {
-            throw new Error("HTTP " + response.status);
+            throw new Error(
+              "HTTP " + response.status
+            );
           }
 
           return response.json();
         })
 
         .then(function(data) {
-          var menu = document.getElementById("menu");
-          var today = new Date().getDay();
+          var menu =
+            document.getElementById("menu");
+
+          var today =
+            new Date().getDay();
 
           menu.innerHTML = "";
 
-          for (var i = 0; i < data.days.length; i++) {
-            var item = data.days[i];
+          for (
+            var i = 0;
+            i < data.days.length;
+            i++
+          ) {
+            var item =
+              data.days[i];
 
-            var card = document.createElement("article");
+            var card =
+              document.createElement("article");
 
             card.className =
               "card" +
@@ -418,7 +499,9 @@
             card.innerHTML =
               '<div class="stripe"></div>' +
 
-              '<span class="badge">Í DAG</span>' +
+              '<span class="badge">' +
+                'Í DAG' +
+              '</span>' +
 
               '<div class="icon-disc">' +
                 '<img src="' +
@@ -443,9 +526,12 @@
           }
 
           if (data.updated_at) {
-            var updated = new Date(data.updated_at);
+            var updated =
+              new Date(data.updated_at);
 
-            document.getElementById("updated").textContent =
+            document.getElementById(
+              "updated"
+            ).textContent =
               "Dagført " +
               new Intl.DateTimeFormat(
                 "fo-FO",
@@ -463,7 +549,9 @@
         .catch(function(error) {
           console.error(error);
 
-          document.getElementById("menu").innerHTML =
+          document.getElementById(
+            "menu"
+          ).innerHTML =
             '<div style="' +
               'font-size:42px;' +
               'color:#005a46;' +
@@ -477,8 +565,15 @@
     updateClock();
     loadMenu();
 
-    setInterval(updateClock, 30000);
-    setInterval(loadMenu, 15 * 60 * 1000);
+    setInterval(
+      updateClock,
+      30000
+    );
+
+    setInterval(
+      loadMenu,
+      15 * 60 * 1000
+    );
   </script>
 </body>
 </html>
