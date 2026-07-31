@@ -12,13 +12,14 @@
 
   <style>
     :root {
-      --bg: #eef2f4;
+      --bg: #f3f7f5;
       --panel: #ffffff;
-      --text: #15262e;
-      --muted: #60727a;
-      --accent: #006b7c;
-      --accent-soft: #d9edf0;
-      --shadow: 0 18px 45px rgba(15, 37, 46, 0.14);
+      --text: #17352c;
+      --muted: #6d847b;
+      --accent: #006c4f;
+      --accent-2: #2f8f6b;
+      --accent-soft: #dcefe7;
+      --shadow: 0 18px 45px rgba(20, 53, 44, 0.10);
     }
 
     * {
@@ -37,16 +38,9 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(
-          circle at 10% 8%,
-          rgba(0, 107, 124, 0.16),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #f7f9fa 0%,
-          var(--bg) 100%
-        );
+        radial-gradient(circle at 10% 8%, rgba(47, 143, 107, 0.10), transparent 30%),
+        radial-gradient(circle at 92% 90%, rgba(0, 108, 79, 0.06), transparent 22%),
+        linear-gradient(135deg, #f9fbfa 0%, var(--bg) 100%);
     }
 
     main {
@@ -55,7 +49,7 @@
       padding: 58px;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      gap: 36px;
+      gap: 30px;
     }
 
     header {
@@ -70,6 +64,7 @@
       font-size: 82px;
       line-height: 0.95;
       letter-spacing: -0.04em;
+      color: var(--accent);
     }
 
     .subtitle {
@@ -80,45 +75,76 @@
 
     .time {
       text-align: right;
-      color: var(--muted);
+      color: var(--accent);
       font-size: 26px;
       white-space: nowrap;
     }
 
     .card {
       min-height: 0;
-      background: var(--panel);
-      border: 4px solid var(--accent);
-      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 2px solid rgba(0, 108, 79, 0.18);
+      border-radius: 34px;
       box-shadow: var(--shadow);
-      padding: 55px 45px;
+      padding: 0;
+      overflow: hidden;
 
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      align-items: stretch;
+    }
+
+    .stripe {
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    }
+
+    .content-inner {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-
+      align-items: center;
       text-align: center;
+      padding: 60px 50px;
+      min-height: 100%;
+    }
+
+    .day-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 34px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .today-badge {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
     }
 
     .day {
-      margin: 0 0 55px;
-      padding: 16px 30px;
-      border-radius: 999px;
-      background: var(--accent-soft);
+      margin: 0;
       color: var(--accent);
-      font-size: 48px;
+      font-size: 58px;
       line-height: 1;
-      letter-spacing: 0.03em;
+      letter-spacing: -0.02em;
     }
 
     .dish {
       margin: 0;
-      max-width: 900px;
-      font-size: 96px;
+      max-width: 980px;
+      font-size: 94px;
       font-weight: 700;
       line-height: 1.08;
       overflow-wrap: anywhere;
+      color: #17352c;
     }
 
     footer {
@@ -133,6 +159,7 @@
       font-size: 48px;
       font-weight: 700;
       text-align: center;
+      color: var(--accent);
     }
 
     @media (max-width: 800px) {
@@ -149,7 +176,11 @@
       }
 
       .day {
-        font-size: 40px;
+        font-size: 44px;
+      }
+
+      .today-badge {
+        font-size: 22px;
       }
     }
   </style>
@@ -169,13 +200,10 @@
       <div class="time" id="clock"></div>
     </header>
 
-    <section
-      class="card"
-      id="content"
-      aria-live="polite"
-    >
-      <div class="error">
-        Lesur matskránna…
+    <section class="card" id="content" aria-live="polite">
+      <div class="stripe"></div>
+      <div class="content-inner">
+        <div class="error">Lesur matskránna…</div>
       </div>
     </section>
 
@@ -218,9 +246,36 @@
         date + " · " + time;
     }
 
-    function loadMenu() {
+    function renderContent(dayName, dishText, weekend) {
       var content = document.getElementById("content");
 
+      var inner = "";
+      if (weekend) {
+        inner =
+          '<div class="stripe"></div>' +
+          '<div class="content-inner">' +
+          '<div class="day-row">' +
+          '<span class="today-badge">Í DAG</span>' +
+          '<h2 class="day">Vikuskifti</h2>' +
+          '</div>' +
+          '<p class="dish">Eingin matskrá er í dag</p>' +
+          '</div>';
+      } else {
+        inner =
+          '<div class="stripe"></div>' +
+          '<div class="content-inner">' +
+          '<div class="day-row">' +
+          '<span class="today-badge">Í DAG</span>' +
+          '<h2 class="day">' + dayName + '</h2>' +
+          '</div>' +
+          '<p class="dish">' + dishText + '</p>' +
+          '</div>';
+      }
+
+      content.innerHTML = inner;
+    }
+
+    function loadMenu() {
       fetch(
         "menu.json?v=" + Date.now(),
         {
@@ -229,58 +284,36 @@
       )
         .then(function(response) {
           if (!response.ok) {
-            throw new Error(
-              "HTTP " + response.status
-            );
+            throw new Error("HTTP " + response.status);
           }
 
           return response.json();
         })
         .then(function(data) {
-          var todayName =
-            weekdays[new Date().getDay()];
+          var todayName = weekdays[new Date().getDay()];
 
           if (!todayName) {
-            content.innerHTML =
-              '<h2 class="day">Vikuskifti</h2>' +
-              '<p class="dish">' +
-              'Eingin matskrá er í dag' +
-              '</p>';
+            renderContent("", "", true);
+          } else {
+            var item = null;
 
-            return;
-          }
-
-          var item = null;
-
-          for (
-            var i = 0;
-            i < data.days.length;
-            i++
-          ) {
-            if (
-              data.days[i].day === todayName
-            ) {
-              item = data.days[i];
-              break;
+            for (var i = 0; i < data.days.length; i++) {
+              if (data.days[i].day === todayName) {
+                item = data.days[i];
+                break;
+              }
             }
+
+            var dishText =
+              item && item.dish
+                ? item.dish
+                : "Eingin rættur er skrásettur";
+
+            renderContent(todayName, dishText, false);
           }
-
-          var dishText =
-            item && item.dish
-              ? item.dish
-              : "Eingin rættur er skrásettur";
-
-          content.innerHTML =
-            '<h2 class="day">' +
-            todayName +
-            '</h2>' +
-            '<p class="dish">' +
-            dishText +
-            '</p>';
 
           if (data.updated_at) {
-            var when =
-              new Date(data.updated_at);
+            var when = new Date(data.updated_at);
 
             var formatted =
               new Intl.DateTimeFormat(
@@ -294,18 +327,17 @@
                 }
               ).format(when);
 
-            document.getElementById(
-              "updated"
-            ).textContent =
+            document.getElementById("updated").textContent =
               "Dagført " + formatted;
           }
         })
         .catch(function(error) {
           console.error(error);
 
-          content.innerHTML =
-            '<div class="error">' +
-            'Matskráin fekst ikki fram.' +
+          document.getElementById("content").innerHTML =
+            '<div class="stripe"></div>' +
+            '<div class="content-inner">' +
+            '<div class="error">Matskráin fekst ikki fram.</div>' +
             '</div>';
         });
     }
@@ -313,15 +345,8 @@
     updateClock();
     loadMenu();
 
-    setInterval(
-      updateClock,
-      30000
-    );
-
-    setInterval(
-      loadMenu,
-      15 * 60 * 1000
-    );
+    setInterval(updateClock, 30000);
+    setInterval(loadMenu, 15 * 60 * 1000);
   </script>
 </body>
 </html>
