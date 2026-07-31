@@ -6,27 +6,14 @@
 <meta http-equiv="refresh" content="900">
 <title>Matskrá á Glasi</title>
 <style>
-:root{--dark:#005a46;--green:#0b8a64;--lime:#76b82a;--text:#111816;--muted:#6d8179;}
+:root{--dark:#005a46;--green:#0b8a64;--lime:#76b82a;--text:#111816;--}
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{font-family:Arial,Helvetica,sans-serif;background:#f8fbf9;color:var(--text)}
-.stage{
-  position:relative;
-  width:100vw;height:100vh;
-  min-width:1073px;min-height:1916px;
-  overflow:hidden;
-  background:linear-gradient(145deg,#fff 0%,#f6faf7 100%);
-}
+.stage{position:relative;width:100vw;height:100vh;min-width:1073px;min-height:1916px;overflow:hidden;background:linear-gradient(145deg,#fff 0%,#f6faf7 100%)}
 .leaf-top,.leaf-bottom{position:absolute;right:18px;width:190px;opacity:.22}
 .leaf-top{top:20px} .leaf-bottom{bottom:-15px;transform:scaleX(-1)}
-main{
-  position:relative;z-index:2;
-  width:100%;height:100%;
-  padding:54px 66px 48px;
-  display:grid;
-  grid-template-rows:180px 1fr 34px;
-  gap:28px;
-}
+main{position:relative;z-index:2;width:100%;height:100%;padding:54px 66px 48px;display:grid;grid-template-rows:180px 1fr 34px;gap:28px}
 header{display:flex;justify-content:space-between;align-items:flex-start}
 h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.045em}
 .subtitle{margin-top:18px;color:var(--green);font-size:29px}
@@ -35,7 +22,7 @@ h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.04
 .menu{display:flex;flex-direction:column;justify-content:flex-start;gap:26px}
 .card{
   height:210px;flex:0 0 210px;
-  display:grid;grid-template-columns:20px 110px 255px 1fr;
+  display:grid;grid-template-columns:20px 110px 330px 1fr;
   align-items:center;column-gap:24px;
   background:rgba(255,255,255,.97);
   border-radius:22px;
@@ -43,7 +30,11 @@ h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.04
   border:3px solid transparent;
   overflow:hidden;
 }
-.card.today{border-color:var(--dark);box-shadow:0 14px 32px rgba(0,90,70,.16)}
+.card.today{
+  background:transparent;
+  border-color:var(--dark);
+  box-shadow:none;
+}
 .stripe{height:100%}
 .card:nth-child(1) .stripe{background:#59b7a6}
 .card:nth-child(2) .stripe{background:#79b92f}
@@ -52,10 +43,10 @@ h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.04
 .card:nth-child(5) .stripe{background:#8bc53e}
 .icon-disc{width:78px;height:78px;border-radius:50%;background:#eef7f2;display:flex;align-items:center;justify-content:center}
 .icon-disc svg{width:46px;height:46px;stroke:var(--dark);fill:none;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
-.day-wrap{display:flex;align-items:center;gap:12px;min-width:0}
+.day-wrap{display:flex;align-items:center;gap:12px;min-width:0;white-space:nowrap}
 .day{margin:0;color:var(--dark);font-size:34px;line-height:1;white-space:nowrap}
 .card:nth-child(2) .day,.card:nth-child(5) .day{color:#5c9f20}
-.badge{display:none;background:var(--green);color:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;letter-spacing:.05em}
+.badge{display:none;background:var(--green);color:#fff;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700;letter-spacing:.05em;line-height:1;flex:0 0 auto}
 .today .badge{display:inline-block}
 .dish{margin:0;padding-right:34px;font-size:34px;line-height:1.16;font-weight:500;overflow-wrap:anywhere}
 footer{display:flex;justify-content:flex-end;color:var(--green);font-size:17px}
