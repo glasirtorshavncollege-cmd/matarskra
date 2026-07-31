@@ -10,11 +10,12 @@
     :root {
       --dark: #005a46;
       --green: #0b8a64;
-      --lime: #76b82a;
       --text: #111816;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html,
     body {
@@ -34,8 +35,8 @@
       position: relative;
       width: 100vw;
       height: 100vh;
-      min-width: 1918px;
-      min-height: 1078px;
+      min-width: 1916px;
+      min-height: 1073px;
       overflow: hidden;
       background: linear-gradient(145deg, #ffffff 0%, #f6faf7 100%);
     }
@@ -43,15 +44,17 @@
     .leaf-top,
     .leaf-bottom {
       position: absolute;
-      right: 22px;
+      right: 24px;
       width: 180px;
-      opacity: 0.18;
+      opacity: 0.20;
     }
 
-    .leaf-top { top: 8px; }
+    .leaf-top {
+      top: 10px;
+    }
 
     .leaf-bottom {
-      bottom: -55px;
+      bottom: -35px;
       transform: scaleX(-1);
     }
 
@@ -60,9 +63,10 @@
       z-index: 2;
       width: 100%;
       height: 100%;
-      padding: 38px 68px 28px;
+      padding: 34px 54px 28px;
+
       display: grid;
-      grid-template-rows: 118px 1fr 24px;
+      grid-template-rows: 120px 1fr 26px;
       gap: 18px;
     }
 
@@ -75,7 +79,7 @@
     h1 {
       margin: 0;
       color: var(--dark);
-      font-size: 64px;
+      font-size: 66px;
       line-height: 0.95;
       letter-spacing: -0.045em;
     }
@@ -83,46 +87,49 @@
     .subtitle {
       margin-top: 12px;
       color: var(--green);
-      font-size: 25px;
+      font-size: 27px;
     }
 
     .clock {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding-top: 12px;
+      gap: 13px;
+      padding-top: 10px;
       color: var(--dark);
-      font-size: 22px;
+      font-size: 24px;
       white-space: nowrap;
     }
 
     .clock svg {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2.4;
     }
 
     .menu {
-      min-height: 0;
-      display: grid;
-      grid-template-rows: repeat(5, minmax(0, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 14px;
+      min-height: 0;
     }
 
     .card {
       position: relative;
+      flex: 1 1 0;
       min-height: 0;
+
       display: grid;
-      grid-template-columns: 18px 84px 245px 1fr;
+      grid-template-columns: 18px 88px 230px 1fr;
       align-items: center;
-      column-gap: 16px;
+      column-gap: 14px;
+
       overflow: hidden;
       background: rgba(255, 255, 255, 0.97);
       border: 3px solid transparent;
       border-radius: 18px;
-      box-shadow: 0 9px 22px rgba(0, 70, 52, 0.10);
+      box-shadow: 0 10px 24px rgba(0, 70, 52, 0.11);
     }
 
     .card.today {
@@ -131,7 +138,10 @@
       box-shadow: none;
     }
 
-    .stripe { height: 100%; }
+    .stripe {
+      height: 100%;
+    }
+
     .card:nth-child(1) .stripe { background: #59b7a6; }
     .card:nth-child(2) .stripe { background: #79b92f; }
     .card:nth-child(3) .stripe { background: #1ca27f; }
@@ -171,7 +181,7 @@
     .day {
       margin: 0;
       color: var(--dark);
-      font-size: 31px;
+      font-size: 34px;
       line-height: 1;
       white-space: nowrap;
     }
@@ -185,41 +195,48 @@
       display: none;
       position: absolute;
       top: 10px;
-      left: 40px;
+      left: 38px;
       z-index: 3;
+
       padding: 8px 15px;
       border-radius: 999px;
       background: var(--green);
       color: #ffffff;
-      font-size: 15px;
+
+      font-size: 16px;
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0.06em;
       white-space: nowrap;
     }
 
-    .today .badge { display: block; }
+    .today .badge {
+      display: block;
+    }
 
     .dish {
       margin: 0;
-      padding-right: 34px;
-      font-size: 31px;
+      padding-right: 32px;
+      font-size: 36px;
       font-weight: 500;
-      line-height: 1.14;
-      overflow-wrap: anywhere;
+      line-height: 1.12;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
     }
 
     footer {
       display: flex;
       justify-content: flex-end;
       color: var(--green);
-      font-size: 15px;
+      font-size: 16px;
     }
   </style>
 </head>
 
 <body>
   <div class="stage">
+
     <div class="leaf-top">
       <svg viewBox="0 0 180 300" aria-hidden="true">
         <g fill="none" stroke="#7fb69f" stroke-width="3">
@@ -265,8 +282,9 @@
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <rect x="3" y="5" width="18" height="16" rx="2"/>
             <path d="M8 3v4M16 3v4M3 10h18"/>
-            <path d="M7 14h2 M11 14h2 M15 14h2 M7 18h2 M11 18h2"/>
+            <path d="M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/>
           </svg>
+
           <span id="dateText"></span>
           <span>|</span>
           <strong id="timeText"></strong>
@@ -301,15 +319,18 @@
     var iconVersion = "20260731-7";
 
     function escapeHtml(value) {
-      return String(value).replace(/[&<>"']/g, function(character) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          "\"": "&quot;",
-          "'": "&#39;"
-        }[character];
-      });
+      return String(value).replace(
+        /[&<>"']/g,
+        function(character) {
+          return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#39;"
+          }[character];
+        }
+      );
     }
 
     function updateClock() {
@@ -340,48 +361,82 @@
         "desember"
       ];
 
-      document.getElementById("dateText").textContent =
-        weekdays[now.getDay()] + " " + now.getDate() + ". " + months[now.getMonth()];
+      var dateText =
+        weekdays[now.getDay()] +
+        " " +
+        now.getDate() +
+        ". " +
+        months[now.getMonth()];
 
       var hours = String(now.getHours()).padStart(2, "0");
       var minutes = String(now.getMinutes()).padStart(2, "0");
 
-      document.getElementById("timeText").textContent = hours + "." + minutes;
+      document.getElementById("dateText").textContent = dateText;
+      document.getElementById("timeText").textContent =
+        hours + "." + minutes;
     }
 
     function loadMenu() {
-      fetch("menu.json?v=" + Date.now(), { cache: "no-store" })
+      fetch(
+        "menu.json?v=" + Date.now(),
+        {
+          cache: "no-store"
+        }
+      )
         .then(function(response) {
           if (!response.ok) {
             throw new Error("HTTP " + response.status);
           }
+
           return response.json();
         })
+
         .then(function(data) {
           var menu = document.getElementById("menu");
           var today = new Date().getDay();
+
           menu.innerHTML = "";
 
           for (var i = 0; i < data.days.length; i++) {
             var item = data.days[i];
+
             var card = document.createElement("article");
 
             card.className =
-              "card" + (dayIndex[item.day] === today ? " today" : "");
+              "card" +
+              (
+                dayIndex[item.day] === today
+                  ? " today"
+                  : ""
+              );
 
-            var iconUrl = icons[i] + "?v=" + iconVersion;
+            var iconUrl =
+              icons[i] +
+              "?v=" +
+              iconVersion;
 
             card.innerHTML =
               '<div class="stripe"></div>' +
+
               '<span class="badge">Í DAG</span>' +
+
               '<div class="icon-disc">' +
-                '<img src="' + iconUrl + '" alt="">' +
+                '<img src="' +
+                iconUrl +
+                '" alt="">' +
               '</div>' +
+
               '<div class="day-wrap">' +
-                '<h2 class="day">' + escapeHtml(item.day) + '</h2>' +
+                '<h2 class="day">' +
+                  escapeHtml(item.day) +
+                '</h2>' +
               '</div>' +
+
               '<p class="dish">' +
-                escapeHtml(item.dish || "Eingin rættur er skrásettur") +
+                escapeHtml(
+                  item.dish ||
+                  "Eingin rættur er skrásettur"
+                ) +
               '</p>';
 
             menu.appendChild(card);
@@ -389,21 +444,31 @@
 
           if (data.updated_at) {
             var updated = new Date(data.updated_at);
+
             document.getElementById("updated").textContent =
               "Dagført " +
-              new Intl.DateTimeFormat("fo-FO", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit"
-              }).format(updated);
+              new Intl.DateTimeFormat(
+                "fo-FO",
+                {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit"
+                }
+              ).format(updated);
           }
         })
+
         .catch(function(error) {
           console.error(error);
+
           document.getElementById("menu").innerHTML =
-            '<div style="font-size:38px;color:#005a46;text-align:center">' +
+            '<div style="' +
+              'font-size:42px;' +
+              'color:#005a46;' +
+              'text-align:center' +
+            '">' +
               'Matskráin fekst ikki fram.' +
             '</div>';
         });
