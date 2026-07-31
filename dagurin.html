@@ -192,12 +192,14 @@
         } else {
           const item = data.days.find(day => day.day === todayName);
 
-          content.innerHTML = `
-            <h2 class="day">${todayName}</h2>
-            <p class="dish">${
-              item?.dish || "Eingin rættur er skrásettur"
-            }</p>
-          `;
+        content.innerHTML = `
+  <h2 class="day">${todayName}</h2>
+  <p class="dish">${
+    item && item.dish
+      ? item.dish
+      : "Eingin rættur er skrásettur"
+  }</p>
+`;
         }
 
         if (data.updated_at) {
