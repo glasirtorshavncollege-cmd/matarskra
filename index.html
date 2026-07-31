@@ -6,229 +6,114 @@
 <meta http-equiv="refresh" content="900">
 <title>Matskrá á Glasi</title>
 <style>
-:root{
-  --dark:#005a46;
-  --green:#0b8a64;
-  --lime:#73b62c;
-  --teal:#48b3a2;
-  --text:#121917;
-  --muted:#5f7b72;
-  --panel:#ffffff;
-  --bg:#f7fbf8;
-}
+:root{--dark:#005a46;--green:#0b8a64;--lime:#76b82a;--text:#111816;--muted:#6d8179;}
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.98),rgba(245,250,247,.98)),
-    #fff;
-}
-body:before,body:after{
-  content:"";
-  position:fixed;
-  right:24px;
-  width:220px;
-  height:330px;
-  opacity:.13;
-  background-repeat:no-repeat;
-  background-size:contain;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 330'%3E%3Cg fill='none' stroke='%230b8a64' stroke-width='3'%3E%3Cpath d='M110 320 C105 220 120 120 150 20'/%3E%3Cpath d='M125 250 C90 225 70 205 58 180'/%3E%3Cpath d='M136 190 C170 160 188 135 196 108'/%3E%3Cpath d='M143 125 C110 100 96 78 88 52'/%3E%3C/g%3E%3Cg fill='%2394c8b4'%3E%3Cellipse cx='75' cy='183' rx='32' ry='15' transform='rotate(38 75 183)'/%3E%3Cellipse cx='180' cy='119' rx='34' ry='16' transform='rotate(-42 180 119)'/%3E%3Cellipse cx='99' cy='67' rx='31' ry='14' transform='rotate(35 99 67)'/%3E%3Cellipse cx='124' cy='242' rx='34' ry='16' transform='rotate(-25 124 242)'/%3E%3C/g%3E%3C/svg%3E");
-}
-body:before{top:0}
-body:after{bottom:-35px;transform:scaleX(-1)}
-main{
+body{font-family:Arial,Helvetica,sans-serif;background:#f8fbf9;color:var(--text)}
+.stage{
   position:relative;
-  z-index:1;
-  width:100%;
-  height:100%;
-  padding:42px 64px 34px;
+  width:100vw;height:100vh;
+  min-width:1073px;min-height:1916px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#fff 0%,#f6faf7 100%);
+}
+.leaf-top,.leaf-bottom{position:absolute;right:18px;width:190px;opacity:.22}
+.leaf-top{top:20px} .leaf-bottom{bottom:-15px;transform:scaleX(-1)}
+main{
+  position:relative;z-index:2;
+  width:100%;height:100%;
+  padding:54px 66px 48px;
   display:grid;
-  grid-template-rows:auto 1fr auto;
-  gap:22px;
+  grid-template-rows:180px 1fr 34px;
+  gap:28px;
 }
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:32px;
-}
-h1{
-  margin:0;
-  font-size:68px;
-  line-height:.95;
-  letter-spacing:-.045em;
-  color:var(--dark);
-}
-.subtitle{
-  margin-top:14px;
-  font-size:27px;
-  color:var(--green);
-}
-.clock{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  color:var(--dark);
-  font-size:23px;
-  white-space:nowrap;
-  padding-bottom:3px;
-}
-.clock svg{width:27px;height:27px;stroke:currentColor;fill:none;stroke-width:2.4}
-.menu{
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:14px;
-}
+header{display:flex;justify-content:space-between;align-items:flex-start}
+h1{margin:0;color:var(--dark);font-size:74px;line-height:.95;letter-spacing:-.045em}
+.subtitle{margin-top:18px;color:var(--green);font-size:29px}
+.clock{display:flex;align-items:center;gap:14px;color:var(--dark);font-size:24px;padding-top:18px}
+.clock svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.4}
+.menu{display:flex;flex-direction:column;justify-content:flex-start;gap:26px}
 .card{
-  flex:0 0 98px;
-  height:98px;
-  display:grid;
-  grid-template-columns:18px 72px 250px 1fr;
-  align-items:center;
-  column-gap:20px;
+  height:210px;flex:0 0 210px;
+  display:grid;grid-template-columns:20px 110px 255px 1fr;
+  align-items:center;column-gap:24px;
   background:rgba(255,255,255,.97);
-  border-radius:16px;
-  box-shadow:0 8px 20px rgba(0,70,52,.12);
-  border:2px solid transparent;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(0,70,52,.11);
+  border:3px solid transparent;
   overflow:hidden;
 }
-.card.today{
-  border-color:var(--dark);
-  box-shadow:0 10px 24px rgba(0,90,70,.17);
-}
+.card.today{border-color:var(--dark);box-shadow:0 14px 32px rgba(0,90,70,.16)}
 .stripe{height:100%}
-.card:nth-child(1) .stripe{background:#5bb6a6}
-.card:nth-child(2) .stripe{background:#78b92e}
-.card:nth-child(3) .stripe{background:#1da17e}
+.card:nth-child(1) .stripe{background:#59b7a6}
+.card:nth-child(2) .stripe{background:#79b92f}
+.card:nth-child(3) .stripe{background:#1ca27f}
 .card:nth-child(4) .stripe{background:#005a46}
-.card:nth-child(5) .stripe{background:#8dc63f}
-.icon-disc{
-  width:54px;height:54px;border-radius:50%;
-  background:#eef7f2;
-  display:flex;align-items:center;justify-content:center;
-}
-.icon-disc svg{
-  width:34px;height:34px;
-  stroke:var(--dark);fill:none;stroke-width:2.25;
-  stroke-linecap:round;stroke-linejoin:round;
-}
-.day-wrap{display:flex;align-items:center;gap:11px;min-width:0}
-.day{
-  margin:0;
-  font-size:29px;
-  line-height:1;
-  color:var(--dark);
-  white-space:nowrap;
-}
-.card:nth-child(2) .day,.card:nth-child(5) .day{color:#5b9d21}
-.badge{
-  display:none;
-  padding:7px 13px;
-  border-radius:999px;
-  background:var(--green);
-  color:#fff;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.05em;
-  white-space:nowrap;
-}
+.card:nth-child(5) .stripe{background:#8bc53e}
+.icon-disc{width:78px;height:78px;border-radius:50%;background:#eef7f2;display:flex;align-items:center;justify-content:center}
+.icon-disc svg{width:46px;height:46px;stroke:var(--dark);fill:none;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.day-wrap{display:flex;align-items:center;gap:12px;min-width:0}
+.day{margin:0;color:var(--dark);font-size:34px;line-height:1;white-space:nowrap}
+.card:nth-child(2) .day,.card:nth-child(5) .day{color:#5c9f20}
+.badge{display:none;background:var(--green);color:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;letter-spacing:.05em}
 .today .badge{display:inline-block}
-.dish{
-  margin:0;
-  padding-right:28px;
-  font-size:27px;
-  font-weight:500;
-  line-height:1.15;
-  color:#111816;
-  overflow-wrap:anywhere;
-}
-footer{
-  display:flex;
-  justify-content:flex-end;
-  font-size:17px;
-  color:var(--green);
-}
-.error{font-size:40px;text-align:center;color:var(--dark)}
+.dish{margin:0;padding-right:34px;font-size:34px;line-height:1.16;font-weight:500;overflow-wrap:anywhere}
+footer{display:flex;justify-content:flex-end;color:var(--green);font-size:17px}
 </style>
 </head>
 <body>
+<div class="stage">
+<div class="leaf-top"><svg viewBox="0 0 180 300" aria-hidden="true">
+<g fill="none" stroke="#7fb69f" stroke-width="3">
+<path d="M90 295 C88 210 100 120 125 18"/>
+<path d="M102 235 C70 212 50 188 38 162"/>
+<path d="M112 175 C142 148 160 120 168 92"/>
+<path d="M119 112 C92 92 78 70 70 46"/>
+</g>
+<g fill="#b7d7c8">
+<ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
+<ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
+<ellipse cx="80" cy="58" rx="27" ry="13" transform="rotate(34 80 58)"/>
+<ellipse cx="100" cy="230" rx="29" ry="14" transform="rotate(-24 100 230)"/>
+</g></svg></div>
+<div class="leaf-bottom"><svg viewBox="0 0 180 300" aria-hidden="true">
+<g fill="none" stroke="#7fb69f" stroke-width="3">
+<path d="M90 295 C88 210 100 120 125 18"/>
+<path d="M102 235 C70 212 50 188 38 162"/>
+<path d="M112 175 C142 148 160 120 168 92"/>
+<path d="M119 112 C92 92 78 70 70 46"/>
+</g>
+<g fill="#b7d7c8">
+<ellipse cx="54" cy="167" rx="26" ry="13" transform="rotate(38 54 167)"/>
+<ellipse cx="154" cy="102" rx="29" ry="14" transform="rotate(-40 154 102)"/>
+<ellipse cx="80" cy="58" rx="27" ry="13" transform="rotate(34 80 58)"/>
+<ellipse cx="100" cy="230" rx="29" ry="14" transform="rotate(-24 100 230)"/>
+</g></svg></div>
 <main>
 <header>
-  <div>
-    <h1>Matskrá á Glasi</h1>
-    <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
-  </div>
-  <div class="clock">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/></svg>
-    <span id="dateText"></span><span>|</span><strong id="timeText"></strong>
-  </div>
+<div><h1>Matskrá á Glasi</h1><div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div></div>
+<div class="clock">
+<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/></svg>
+<span id="dateText"></span><span>|</span><strong id="timeText"></strong>
+</div>
 </header>
-
-<section class="menu" id="menu" aria-live="polite"></section>
+<section class="menu" id="menu"></section>
 <footer><span id="updated"></span></footer>
 </main>
-
+</div>
 <script>
 var dayIndex={"Mánadag":1,"Týsdag":2,"Mikudag":3,"Hósdag":4,"Fríggjadag":5};
-
-var icons=[
-'<svg viewBox="0 0 48 48"><path d="M11 25h26c0 8-5 12-13 12S11 33 11 25Z"/><path d="M14 40h20"/><path d="M18 20c-3-4 3-5 0-10M24 20c-3-4 3-5 0-10M30 20c-3-4 3-5 0-10"/></svg>',
-'<svg viewBox="0 0 48 48"><path d="M24 40V18"/><path d="M24 24c-8 0-13-5-13-12 8 0 13 5 13 12Z"/><path d="M24 31c8 0 13-5 13-12-8 0-13 5-13 12Z"/><path d="M24 18c0-7 4-11 9-14 1 7-2 12-9 14Z"/></svg>',
-'<svg viewBox="0 0 48 48"><path d="M7 24c8-9 18-12 29-5l6-5v20l-6-5C25 36 15 33 7 24Z"/><circle cx="32" cy="22" r="1.7" fill="%23005a46" stroke="none"/><path d="M11 24h9"/></svg>',
-'<svg viewBox="0 0 48 48"><path d="M10 31h28"/><path d="M14 31c1-10 7-16 17-16s15 6 17 16" transform="translate(-7 0)"/><path d="M24 11v4"/><circle cx="24" cy="9" r="2"/><path d="M8 36h32"/></svg>',
-'<svg viewBox="0 0 48 48"><path d="M10 26h28c-2 9-7 13-14 13s-12-4-14-13Z"/><path d="M15 25c0-4 3-7 7-7 2 0 4 1 5 3 1-3 4-5 7-5 4 0 7 3 7 7"/><path d="M19 18c-1-4 1-7 4-9M30 17c0-4 2-7 5-9"/></svg>'
-];
-
-function updateClock(){
-  var now=new Date();
-  document.getElementById("dateText").textContent=
-    new Intl.DateTimeFormat("fo-FO",{weekday:"long",day:"numeric",month:"long"}).format(now);
-  document.getElementById("timeText").textContent=
-    new Intl.DateTimeFormat("fo-FO",{hour:"2-digit",minute:"2-digit"}).format(now);
-}
-function esc(s){
-  return String(s).replace(/[&<>"']/g,function(c){
-    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-  });
-}
+var icons=[`<svg viewBox="0 0 64 64"><path d="M14 34h36c0 10-7 16-18 16S14 44 14 34Z"/><path d="M18 53h28"/><path d="M23 28c-4-5 4-7 0-14M32 28c-4-5 4-7 0-14M41 28c-4-5 4-7 0-14"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M32 54V24"/><path d="M32 31C21 31 14 24 14 14c11 0 18 7 18 17Z"/><path d="M32 41c11 0 18-7 18-17-11 0-18 7-18 17Z"/><path d="M32 24c0-10 5-15 12-20 2 10-3 17-12 20Z"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M8 32c11-12 25-16 40-7l8-7v28l-8-7C33 48 19 44 8 32Z"/><circle cx="43" cy="29" r="2.2" fill="#005a46" stroke="none"/><path d="M14 32h13"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M13 42h38"/><path d="M18 42c2-14 9-22 23-22s21 8 23 22" transform="translate(-9 0)"/><path d="M32 15v5"/><circle cx="32" cy="12" r="3"/><path d="M11 49h42"/></svg>`,`<svg viewBox="0 0 64 64"><path d="M13 35h38c-3 12-10 18-19 18s-16-6-19-18Z"/><path d="M20 34c0-6 4-10 10-10 3 0 5 1 7 4 2-4 5-7 10-7 6 0 10 4 10 10"/><path d="M25 24c-2-6 1-10 5-13M40 23c0-6 3-10 7-13"/></svg>`];
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];})}
+function updateClock(){var n=new Date();document.getElementById("dateText").textContent=new Intl.DateTimeFormat("fo-FO",{weekday:"long",day:"numeric",month:"long"}).format(n);document.getElementById("timeText").textContent=new Intl.DateTimeFormat("fo-FO",{hour:"2-digit",minute:"2-digit"}).format(n);}
 function loadMenu(){
-  var menu=document.getElementById("menu");
-  fetch("menu.json?v="+Date.now(),{cache:"no-store"})
-  .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
-  .then(function(data){
-    menu.innerHTML="";
-    var today=new Date().getDay();
-    for(var i=0;i<data.days.length;i++){
-      var item=data.days[i];
-      var isToday=dayIndex[item.day]===today;
-      var card=document.createElement("article");
-      card.className="card"+(isToday?" today":"");
-      card.innerHTML=
-        '<div class="stripe"></div>'+
-        '<div class="icon-disc">'+icons[i]+'</div>'+
-        '<div class="day-wrap"><h2 class="day">'+esc(item.day)+'</h2><span class="badge">Í DAG</span></div>'+
-        '<p class="dish">'+esc(item.dish||"Eingin rættur er skrásettur")+'</p>';
-      menu.appendChild(card);
-    }
-    if(data.updated_at){
-      var when=new Date(data.updated_at);
-      document.getElementById("updated").textContent="Dagført "+
-      new Intl.DateTimeFormat("fo-FO",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(when);
-    }
-  })
-  .catch(function(e){
-    console.error(e);
-    menu.innerHTML='<div class="error">Matskráin fekst ikki fram.</div>';
-  });
+fetch("menu.json?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(function(data){
+var menu=document.getElementById("menu"),today=new Date().getDay();menu.innerHTML="";
+for(var i=0;i<data.days.length;i++){var item=data.days[i],card=document.createElement("article");card.className="card"+(dayIndex[item.day]===today?" today":"");card.innerHTML='<div class="stripe"></div><div class="icon-disc">'+icons[i]+'</div><div class="day-wrap"><h2 class="day">'+esc(item.day)+'</h2><span class="badge">Í DAG</span></div><p class="dish">'+esc(item.dish||"Eingin rættur er skrásettur")+'</p>';menu.appendChild(card);}
+if(data.updated_at){var w=new Date(data.updated_at);document.getElementById("updated").textContent="Dagført "+new Intl.DateTimeFormat("fo-FO",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(w);}
+}).catch(function(e){console.error(e);document.getElementById("menu").innerHTML='<div style="font-size:42px;color:#005a46;text-align:center">Matskráin fekst ikki fram.</div>';})
 }
-updateClock();loadMenu();
-setInterval(updateClock,30000);
-setInterval(loadMenu,15*60*1000);
+updateClock();loadMenu();setInterval(updateClock,30000);setInterval(loadMenu,15*60*1000);
 </script>
 </body>
 </html>
