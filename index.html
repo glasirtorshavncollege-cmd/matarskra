@@ -2,10 +2,12 @@
 <html lang="fo">
 <head>
   <meta charset="utf-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
+
   <meta http-equiv="refresh" content="900">
 
   <title>Matskrá á Glasi</title>
@@ -43,6 +45,7 @@
       min-width: 1073px;
       min-height: 1916px;
       overflow: hidden;
+
       background:
         linear-gradient(
           145deg,
@@ -71,6 +74,7 @@
     main {
       position: relative;
       z-index: 2;
+
       width: 100%;
       height: 100%;
       padding: 54px 66px 48px;
@@ -88,6 +92,7 @@
 
     h1 {
       margin: 0;
+
       color: var(--dark);
       font-size: 74px;
       line-height: 0.95;
@@ -96,6 +101,7 @@
 
     .subtitle {
       margin-top: 18px;
+
       color: var(--green);
       font-size: 29px;
     }
@@ -104,6 +110,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
+
       padding-top: 18px;
 
       color: var(--dark);
@@ -114,6 +121,7 @@
     .clock svg {
       width: 28px;
       height: 28px;
+
       fill: none;
       stroke: currentColor;
       stroke-width: 2.4;
@@ -136,10 +144,14 @@
       column-gap: 24px;
 
       overflow: hidden;
+
       background: rgba(255, 255, 255, 0.97);
       border: 3px solid transparent;
       border-radius: 22px;
-      box-shadow: 0 12px 28px rgba(0, 70, 52, 0.11);
+
+      box-shadow:
+        0 12px 28px
+        rgba(0, 70, 52, 0.11);
     }
 
     .card.today {
@@ -179,13 +191,43 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      overflow: visible;
     }
 
     .icon-disc img {
       display: block;
+
       width: 78px;
       height: 78px;
+
       object-fit: contain;
+      transform-origin: center;
+    }
+
+    /*
+      Javnar sjónligu støddina.
+      Myndafílurnar hava ymisk nógv tómt rúm rundan um ikonini.
+    */
+
+    .card:nth-child(1) .icon-disc img {
+      transform: scale(1.8);
+    }
+
+    .card:nth-child(2) .icon-disc img {
+      transform: scale(1.05);
+    }
+
+    .card:nth-child(3) .icon-disc img {
+      transform: scale(1.65);
+    }
+
+    .card:nth-child(4) .icon-disc img {
+      transform: scale(1.55);
+    }
+
+    .card:nth-child(5) .icon-disc img {
+      transform: scale(1.55);
     }
 
     .day-wrap {
@@ -199,6 +241,7 @@
 
     .day {
       margin: 0;
+
       color: var(--dark);
       font-size: 34px;
       line-height: 1;
@@ -238,6 +281,7 @@
       font-size: 34px;
       font-weight: 500;
       line-height: 1.16;
+
       overflow-wrap: anywhere;
     }
 
@@ -275,6 +319,7 @@
             ry="13"
             transform="rotate(38 54 167)"
           />
+
           <ellipse
             cx="154"
             cy="102"
@@ -282,6 +327,7 @@
             ry="14"
             transform="rotate(-40 154 102)"
           />
+
           <ellipse
             cx="80"
             cy="58"
@@ -289,6 +335,7 @@
             ry="13"
             transform="rotate(34 80 58)"
           />
+
           <ellipse
             cx="100"
             cy="230"
@@ -321,6 +368,7 @@
             ry="13"
             transform="rotate(38 54 167)"
           />
+
           <ellipse
             cx="154"
             cy="102"
@@ -328,6 +376,7 @@
             ry="14"
             transform="rotate(-40 154 102)"
           />
+
           <ellipse
             cx="80"
             cy="58"
@@ -335,6 +384,7 @@
             ry="13"
             transform="rotate(34 80 58)"
           />
+
           <ellipse
             cx="100"
             cy="230"
@@ -365,8 +415,16 @@
               height="16"
               rx="2"
             />
+
             <path d="M8 3v4M16 3v4M3 10h18"/>
-            <path d="M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/>
+
+            <path
+              d="M7 14h2
+                 M11 14h2
+                 M15 14h2
+                 M7 18h2
+                 M11 18h2"
+            />
           </svg>
 
           <span id="dateText"></span>
@@ -405,10 +463,11 @@
     ];
 
     /*
-      Broyt hetta talið, tá tú leggur nýggj ikon á GitHub.
+      Broyt hetta virðið, tá nýggj ikon verða løgd á GitHub.
       Tað tvingar browsaran at heinta ikonini umaftur.
     */
-    var iconVersion = "20260731-2";
+
+    var iconVersion = "20260731-3";
 
     function escapeHtml(value) {
       return String(value).replace(
@@ -428,24 +487,58 @@
     function updateClock() {
       var now = new Date();
 
-      document.getElementById("dateText").textContent =
-        new Intl.DateTimeFormat(
-          "fo-FO",
-          {
-            weekday: "long",
-            day: "numeric",
-            month: "long"
-          }
-        ).format(now);
+      var weekdays = [
+        "sunnudagur",
+        "mánadagur",
+        "týsdagur",
+        "mikudagur",
+        "hósdagur",
+        "fríggjadagur",
+        "leygardagur"
+      ];
 
-      document.getElementById("timeText").textContent =
-        new Intl.DateTimeFormat(
-          "fo-FO",
-          {
-            hour: "2-digit",
-            minute: "2-digit"
-          }
-        ).format(now);
+      var months = [
+        "januar",
+        "februar",
+        "mars",
+        "apríl",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "desember"
+      ];
+
+      var dateText =
+        weekdays[now.getDay()] +
+        " " +
+        now.getDate() +
+        ". " +
+        months[now.getMonth()];
+
+      var hours =
+        String(now.getHours()).padStart(
+          2,
+          "0"
+        );
+
+      var minutes =
+        String(now.getMinutes()).padStart(
+          2,
+          "0"
+        );
+
+      document.getElementById(
+        "dateText"
+      ).textContent = dateText;
+
+      document.getElementById(
+        "timeText"
+      ).textContent =
+        hours + "." + minutes;
     }
 
     function loadMenu() {
@@ -464,9 +557,12 @@
 
           return response.json();
         })
+
         .then(function(data) {
           var menu =
-            document.getElementById("menu");
+            document.getElementById(
+              "menu"
+            );
 
           var today =
             new Date().getDay();
@@ -478,10 +574,13 @@
             i < data.days.length;
             i++
           ) {
-            var item = data.days[i];
+            var item =
+              data.days[i];
 
             var card =
-              document.createElement("article");
+              document.createElement(
+                "article"
+              );
 
             card.className =
               "card" +
@@ -527,7 +626,9 @@
 
           if (data.updated_at) {
             var updated =
-              new Date(data.updated_at);
+              new Date(
+                data.updated_at
+              );
 
             document.getElementById(
               "updated"
@@ -545,6 +646,7 @@
               ).format(updated);
           }
         })
+
         .catch(function(error) {
           console.error(error);
 
