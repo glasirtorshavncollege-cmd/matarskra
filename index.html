@@ -135,11 +135,13 @@
     }
 
     .card {
+      position: relative;
+
       height: 210px;
       flex: 0 0 210px;
 
       display: grid;
-      grid-template-columns: 20px 82px 210px 1fr;
+      grid-template-columns: 20px 76px 205px 1fr;
       align-items: center;
       column-gap: 12px;
 
@@ -206,8 +208,7 @@
     }
 
     /*
-      Javnar sjónligu støddina.
-      Myndafílurnar hava ymisk nógv tómt rúm rundan um ikonini.
+      Javnar sjónligu støddina á ikonunum.
     */
 
     .card:nth-child(1) .icon-disc img {
@@ -233,7 +234,6 @@
     .day-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
 
       min-width: 0;
       white-space: nowrap;
@@ -255,28 +255,32 @@
 
     .badge {
       display: none;
-      flex: 0 0 auto;
 
-      padding: 8px 12px;
+      position: absolute;
+      top: 14px;
+      left: 42px;
+      z-index: 3;
+
+      padding: 9px 16px;
       border-radius: 999px;
 
       background: var(--green);
       color: #ffffff;
 
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 700;
       line-height: 1;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       white-space: nowrap;
     }
 
     .today .badge {
-      display: inline-block;
+      display: block;
     }
 
     .dish {
       margin: 0;
-      padding-right: 34px;
+      padding-right: 32px;
 
       font-size: 34px;
       font-weight: 500;
@@ -462,12 +466,7 @@
       "menu-icon-5.png"
     ];
 
-    /*
-      Broyt hetta virðið, tá nýggj ikon verða løgd á GitHub.
-      Tað tvingar browsaran at heinta ikonini umaftur.
-    */
-
-    var iconVersion = "20260731-3";
+    var iconVersion = "20260731-4";
 
     function escapeHtml(value) {
       return String(value).replace(
@@ -574,8 +573,7 @@
             i < data.days.length;
             i++
           ) {
-            var item =
-              data.days[i];
+            var item = data.days[i];
 
             var card =
               document.createElement(
@@ -598,6 +596,10 @@
             card.innerHTML =
               '<div class="stripe"></div>' +
 
+              '<span class="badge">' +
+                'Í DAG' +
+              '</span>' +
+
               '<div class="icon-disc">' +
                 '<img src="' +
                 iconUrl +
@@ -608,10 +610,6 @@
                 '<h2 class="day">' +
                   escapeHtml(item.day) +
                 '</h2>' +
-
-                '<span class="badge">' +
-                  'Í DAG' +
-                '</span>' +
               '</div>' +
 
               '<p class="dish">' +
