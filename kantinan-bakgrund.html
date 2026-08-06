@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="fo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="1800">
+  <title>Matskrá á Glasi</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111816;
+      background: #eef4f1;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #eef4f1;
+    }
+
+    .stage:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("kantina-bakgrund.png");
+      background-size: cover;
+      background-position: center center;
+      filter: blur(1px);
+      transform: scale(1.02);
+    }
+
+    .stage:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        145deg,
+        rgba(248, 252, 250, 0.86) 0%,
+        rgba(241, 248, 244, 0.82) 100%
+      );
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      padding: 32px 50px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      height: 112px;
+      flex: 0 0 112px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .header-panel {
+      display: inline-block;
+      padding: 8px 14px 10px 0;
+      border-radius: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #005a46;
+      font-size: 64px;
+      line-height: 0.95;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      color: #0b8a64;
+      font-size: 26px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+
+    .clock {
+      padding: 10px 14px 10px 16px;
+      color: #005a46;
+      font-size: 24px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.50);
+      border-radius: 14px;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 4px 14px rgba(0, 70, 52, 0.06);
+    }
+
+    .menu {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card {
+      position: relative;
+      flex: 1 1 0;
+      min-height: 0;
+      margin-bottom: 13px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.90);
+      border: 2px solid rgba(0, 90, 70, 0.08);
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 70, 52, 0.10);
+      backdrop-filter: blur(4px);
+    }
+
+    .card:last-child { margin-bottom: 0; }
+
+    .card.today {
+      background: rgba(255, 255, 255, 0.97);
+      border: 3px solid #005a46;
+      box-shadow: 0 14px 30px rgba(0, 70, 52, 0.16);
+    }
+
+    .stripe {
+      align-self: stretch;
+      width: 18px;
+      flex: 0 0 18px;
+    }
+
+    .card:nth-child(1) .stripe { background: #59b7a6; }
+    .card:nth-child(2) .stripe { background: #79b92f; }
+    .card:nth-child(3) .stripe { background: #1ca27f; }
+    .card:nth-child(4) .stripe { background: #005a46; }
+    .card:nth-child(5) .stripe { background: #8bc53e; }
+
+    .icon-disc {
+      width: 96px;
+      flex: 0 0 96px;
+      margin-left: 16px;
+      margin-right: 12px;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .icon-disc img {
+      display: block;
+      width: 82px;
+      height: 82px;
+      margin: 0 auto;
+      object-fit: contain;
+      transform-origin: center center;
+      filter: drop-shadow(0 1px 1px rgba(255,255,255,0.5));
+    }
+
+    .card:nth-child(1) .icon-disc img { transform: scale(1.45); }
+    .card:nth-child(2) .icon-disc img { transform: scale(1.30); }
+    .card:nth-child(3) .icon-disc img { transform: scale(1.65); }
+    .card:nth-child(4) .icon-disc img { transform: scale(1.55); }
+    .card:nth-child(5) .icon-disc img { transform: scale(1.70); }
+
+    .day-wrap {
+      width: 220px;
+      flex: 0 0 220px;
+      margin-right: 18px;
+    }
+
+    .day {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1;
+      white-space: nowrap;
+      color: #506a63;
+    }
+
+    .dish {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin: 0;
+      padding-right: 30px;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.12;
+      word-break: normal;
+      color: #4f5b57;
+    }
+
+    .card.today .day {
+      color: #005a46;
+      font-weight: 700;
+    }
+
+    .card.today .dish {
+      color: #111816;
+      font-weight: 500;
+    }
+
+    .card:nth-child(2) .day,
+    .card:nth-child(5) .day {
+      color: #6c9d2b;
+    }
+
+    .card.today:nth-child(2) .day,
+    .card.today:nth-child(5) .day {
+      color: #4f8f18;
+    }
+
+    .badge {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 28px;
+      padding: 10px 18px;
+      border-radius: 22px;
+      background: #0b8a64;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      box-shadow: 0 4px 10px rgba(0, 70, 52, 0.18);
+    }
+
+    .today .badge { display: block; }
+
+    footer {
+      height: 24px;
+      flex: 0 0 24px;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      color: #0b8a64;
+      font-size: 15px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .status {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #005a46;
+      font-size: 38px;
+      text-align: center;
+      background: rgba(255,255,255,0.75);
+      border-radius: 18px;
+    }
+
+    #connectionStatus { color: #5d706a; }
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <main>
+      <header>
+        <div class="header-panel">
+          <h1>Matskrá á Glasi</h1>
+          <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
+        </div>
+
+        <div class="clock">
+          <span id="dateText">Lesur dagfesting…</span>
+          <span> | </span>
+          <strong id="timeText"></strong>
+        </div>
+      </header>
+
+      <section class="menu" id="menu">
+        <div class="status">Lesur matskránna…</div>
+      </section>
+
+      <footer>
+        <span id="connectionStatus"></span>
+        <span id="updated"></span>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var menuDays = {
+        "Mánadag": 1,
+        "Týsdag": 2,
+        "Mikudag": 3,
+        "Hósdag": 4,
+        "Fríggjadag": 5
+      };
+
+      var icons = [
+        "menu-icon-1.png",
+        "menu-icon-2.png",
+        "menu-icon-3.png",
+        "menu-icon-4.png",
+        "menu-icon-5.png"
+      ];
+
+      var iconVersion = "20260803-bg-1";
+      var storageKey = "glasir-menu-cache-kantinan-bg-v1";
+      var retryDelay = 30000;
+      var refreshDelay = 15 * 60 * 1000;
+      var requestTimeout = 12000;
+      var retryTimer = null;
+      var refreshTimer = null;
+
+      function twoDigits(number) {
+        return number < 10 ? "0" + number : "" + number;
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function updateClock() {
+        var now = new Date();
+
+        var weekdays = [
+          "sunnudagur",
+          "mánadagur",
+          "týsdagur",
+          "mikudagur",
+          "hósdagur",
+          "fríggjadagur",
+          "leygardagur"
+        ];
+
+        var months = [
+          "januar",
+          "februar",
+          "mars",
+          "apríl",
+          "mai",
+          "juni",
+          "juli",
+          "august",
+          "september",
+          "oktober",
+          "november",
+          "desember"
+        ];
+
+        document.getElementById("dateText").innerHTML =
+          weekdays[now.getDay()] + " " +
+          now.getDate() + ". " +
+          months[now.getMonth()];
+
+        document.getElementById("timeText").innerHTML =
+          twoDigits(now.getHours()) + "." +
+          twoDigits(now.getMinutes());
+      }
+
+      function formatUpdatedAt(value) {
+        var d = new Date(value);
+
+        if (isNaN(d.getTime())) {
+          return String(value);
+        }
+
+        return (
+          twoDigits(d.getDate()) + "." +
+          twoDigits(d.getMonth() + 1) + "." +
+          d.getFullYear() +
+          " kl. " +
+          twoDigits(d.getHours()) + "." +
+          twoDigits(d.getMinutes())
+        );
+      }
+
+      function setConnectionStatus(text) {
+        document.getElementById("connectionStatus").innerHTML =
+          escapeHtml(text || "");
+      }
+
+      function showMessage(message) {
+        document.getElementById("menu").innerHTML =
+          '<div class="status">' + escapeHtml(message) + '</div>';
+      }
+
+      function renderMenu(data, fromCache) {
+        if (!data || !data.days || !data.days.length) {
+          throw new Error("Ógildug menu.json");
+        }
+
+        var menu = document.getElementById("menu");
+        var today = new Date().getDay();
+        var html = "";
+        var i;
+        var item;
+        var todayClass;
+        var dish;
+
+        for (i = 0; i < data.days.length; i++) {
+          item = data.days[i];
+          todayClass = menuDays[item.day] === today ? " today" : "";
+          dish = item.dish ? item.dish : "Eingin rættur er skrásettur";
+
+          html +=
+            '<article class="card' + todayClass + '">' +
+              '<div class="stripe"></div>' +
+              '<span class="badge">Í DAG</span>' +
+              '<div class="icon-disc">' +
+                '<img src="' + icons[i] + '?v=' + iconVersion + '" alt="">' +
+              '</div>' +
+              '<div class="day-wrap">' +
+                '<h2 class="day">' + escapeHtml(item.day) + '</h2>' +
+              '</div>' +
+              '<p class="dish">' + escapeHtml(dish) + '</p>' +
+            '</article>';
+        }
+
+        menu.innerHTML = html;
+
+        if (data.updated_at) {
+          document.getElementById("updated").innerHTML =
+            "Dagført " + escapeHtml(formatUpdatedAt(data.updated_at));
+        } else {
+          document.getElementById("updated").innerHTML = "";
+        }
+
+        setConnectionStatus(
+          fromCache ? "Vísir seinast goymdu matskrá" : ""
+        );
+      }
+
+      function saveCache(data) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(data));
+        } catch (error) {
+        }
+      }
+
+      function loadCache() {
+        try {
+          var cached = localStorage.getItem(storageKey);
+          return cached ? JSON.parse(cached) : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function scheduleRetry() {
+        if (retryTimer) {
+          clearTimeout(retryTimer);
+        }
+
+        retryTimer = setTimeout(loadMenu, retryDelay);
+      }
+
+      function scheduleRefresh() {
+        if (refreshTimer) {
+          clearTimeout(refreshTimer);
+        }
+
+        refreshTimer = setTimeout(loadMenu, refreshDelay);
+      }
+
+      function handleFailure() {
+        var cached = loadCache();
+
+        if (cached) {
+          try {
+            renderMenu(cached, true);
+            setConnectionStatus("Samband fekst ikki – roynir aftur");
+          } catch (error) {
+            showMessage("Matskráin fekst ikki fram. Roynir aftur...");
+          }
+        } else {
+          showMessage("Matskráin fekst ikki fram. Roynir aftur...");
+        }
+
+        scheduleRetry();
+      }
+
+      function loadMenu() {
+        var request = new XMLHttpRequest();
+        var finished = false;
+
+        setConnectionStatus("Dagførir…");
+
+        request.open(
+          "GET",
+          "menu.json?v=" + new Date().getTime(),
+          true
+        );
+
+        request.timeout = requestTimeout;
+
+        request.onreadystatechange = function () {
+          if (request.readyState !== 4 || finished) {
+            return;
+          }
+
+          finished = true;
+
+          if (request.status >= 200 && request.status < 300) {
+            try {
+              var data = JSON.parse(request.responseText);
+              renderMenu(data, false);
+              saveCache(data);
+              scheduleRefresh();
+            } catch (error) {
+              handleFailure();
+            }
+          } else {
+            handleFailure();
+          }
+        };
+
+        request.onerror = function () {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        };
+
+        request.ontimeout = function () {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        };
+
+        try {
+          request.send();
+        } catch (error) {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        }
+      }
+
+      updateClock();
+      setInterval(updateClock, 30000);
+
+      var cached = loadCache();
+
+      if (cached) {
+        try {
+          renderMenu(cached, true);
+        } catch (error) {
+        }
+      }
+
+      loadMenu();
+    }());
+  </script>
+</body>
+</html>
