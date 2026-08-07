@@ -27,29 +27,15 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #eef4f1;
-    }
-
-    .stage:before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("dagurin-bakgrund.png");
+      background:
+        linear-gradient(
+          rgba(248, 252, 250, 0.82),
+          rgba(248, 252, 250, 0.82)
+        ),
+        url("dagurin-bakgrund.png");
       background-size: cover;
       background-position: center center;
-      filter: blur(1px);
-      transform: scale(1.02);
-    }
-
-    .stage:after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        145deg,
-        rgba(248, 252, 250, 0.84) 0%,
-        rgba(241, 248, 244, 0.80) 100%
-      );
+      background-repeat: no-repeat;
     }
 
     main {
@@ -70,25 +56,18 @@
       align-items: flex-start;
     }
 
-    .header-panel {
-      display: inline-block;
-      border-radius: 16px;
-    }
-
     h1 {
       margin: 0;
       color: #005a46;
       font-size: 74px;
       line-height: 0.95;
       letter-spacing: -2px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
     }
 
     .subtitle {
       margin-top: 18px;
       color: #0b8a64;
       font-size: 29px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
     }
 
     .clock {
@@ -96,9 +75,8 @@
       color: #005a46;
       font-size: 24px;
       white-space: nowrap;
-      background: rgba(255, 255, 255, 0.50);
+      background: rgba(255, 255, 255, 0.58);
       border-radius: 14px;
-      backdrop-filter: blur(3px);
       box-shadow: 0 4px 14px rgba(0, 70, 52, 0.06);
     }
 
@@ -107,11 +85,10 @@
       flex: 1 1 auto;
       min-height: 0;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       border: 4px solid #005a46;
       border-radius: 28px;
       box-shadow: 0 16px 38px rgba(0, 70, 52, 0.16);
-      backdrop-filter: blur(4px);
     }
 
     .stripe {
@@ -148,7 +125,6 @@
       width: 340px;
       height: 340px;
       object-fit: contain;
-      filter: drop-shadow(0 1px 1px rgba(255,255,255,0.5));
     }
 
     .day-row {
@@ -179,7 +155,6 @@
       font-size: 64px;
       line-height: 1;
       white-space: nowrap;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.45);
     }
 
     .dish {
@@ -193,7 +168,6 @@
       letter-spacing: -1px;
       text-align: center;
       word-break: normal;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.35);
     }
 
     .error {
@@ -219,12 +193,9 @@
       justify-content: space-between;
       color: #0b8a64;
       font-size: 17px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
     }
 
-    #status {
-      color: #6a7d77;
-    }
+    #status { color: #6a7d77; }
   </style>
 </head>
 
@@ -232,7 +203,7 @@
   <div class="stage">
     <main>
       <header>
-        <div class="header-panel">
+        <div>
           <h1>Dagsins rættur</h1>
           <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
         </div>
@@ -273,8 +244,8 @@
       var requestTimeout = 12000;
       var retryTimer = null;
       var refreshTimer = null;
-      var iconVersion = "20260807-bg-1";
-      var storageKey = "glasir-menu-cache-dagur-bg-v1";
+      var iconVersion = "20260807-bg-2";
+      var storageKey = "glasir-menu-cache-dagur-bg-v2";
 
       function twoDigits(number) {
         return number < 10 ? "0" + number : "" + number;
@@ -414,8 +385,7 @@
       function saveCache(data) {
         try {
           localStorage.setItem(storageKey, JSON.stringify(data));
-        } catch (error) {
-        }
+        } catch (error) {}
       }
 
       function loadCache() {
@@ -431,7 +401,6 @@
         if (retryTimer) {
           clearTimeout(retryTimer);
         }
-
         retryTimer = setTimeout(loadMenu, retryDelay);
       }
 
@@ -439,7 +408,6 @@
         if (refreshTimer) {
           clearTimeout(refreshTimer);
         }
-
         refreshTimer = setTimeout(loadMenu, refreshDelay);
       }
 
@@ -451,16 +419,10 @@
             renderMenu(cached, true);
             setStatus("Samband fekst ikki – roynir aftur");
           } catch (error) {
-            renderError(
-              "Matskráin fekst ikki fram.",
-              "Roynir aftur um 30 sekund."
-            );
+            renderError("Matskráin fekst ikki fram.", "Roynir aftur um 30 sekund.");
           }
         } else {
-          renderError(
-            "Matskráin fekst ikki fram.",
-            "Roynir aftur um 30 sekund."
-          );
+          renderError("Matskráin fekst ikki fram.", "Roynir aftur um 30 sekund.");
         }
 
         scheduleRetry();
@@ -532,8 +494,7 @@
       if (cached) {
         try {
           renderMenu(cached, true);
-        } catch (error) {
-        }
+        } catch (error) {}
       }
 
       loadMenu();
