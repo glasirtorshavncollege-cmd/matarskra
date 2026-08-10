@@ -1,6 +1,6 @@
 {
   "source": "https://www.glasir.fo/um-skulan/kantinan-a-glasi/",
-  "updated_at": "2026-08-10T08:52:08Z",
+  "updated_at": "2026-08-10T10:30:07Z",
   "days": [
     {
       "day": "Mánadag",
@@ -12,15 +12,15 @@
     },
     {
       "day": "Mikudag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Karrybollar við rísi"
     },
     {
       "day": "Hósdag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Bolgonese við pasta"
     },
     {
       "day": "Fríggjadag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Fleskasteik við eplum og sós (glutenfríur valmøguleiki)"
     }
   ]
 }
