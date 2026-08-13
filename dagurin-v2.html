@@ -1,195 +1,495 @@
 <!doctype html>
 <html lang="fo">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="1800">
-<title>Dagsins rættur á Glasi</title>
-<style>
-*{box-sizing:border-box}
-html,body{width:100%;height:100%;margin:0;overflow:hidden}
-body{font-family:Arial,Helvetica,sans-serif;background:#000;color:#fff}
-main{width:100%;height:100%;padding:54px 66px 48px;display:flex;flex-direction:column}
-header{height:180px;flex:0 0 180px;display:flex;justify-content:space-between;align-items:flex-start}
-h1{margin:0;color:#fff;font-size:74px;line-height:.95;letter-spacing:-2px}
-.subtitle{margin-top:18px;color:#d6d6d6;font-size:29px}
-.clock{padding-top:18px;color:#fff;font-size:24px;white-space:nowrap}
-.card{position:relative;flex:1 1 auto;min-height:0;overflow:hidden;background:#111;border:4px solid #fff;border-radius:28px;display:table;width:100%}
-.content{width:100%;height:100%;padding:60px 70px;display:table-cell;vertical-align:middle;text-align:center}
-.day-row{margin-bottom:40px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
-.badge{padding:16px 28px;border-radius:32px;background:#fff;color:#000;font-size:32px;font-weight:bold;line-height:1;letter-spacing:1px;white-space:nowrap}
-.day{margin:0;color:#fff;font-size:66px;line-height:1;white-space:nowrap}
-.dish{width:100%;max-width:860px;margin:0 auto;color:#fff;font-size:84px;font-weight:bold;line-height:1.08;letter-spacing:-1px;text-align:center}
-.error{color:#fff;font-size:42px;font-weight:bold;line-height:1.3;text-align:center}
-.suberror{margin-top:18px;color:#bfbfbf;font-size:24px;font-weight:normal}
-footer{height:34px;flex:0 0 34px;padding-top:10px;display:flex;justify-content:space-between;color:#bfbfbf;font-size:17px}
-#status{color:#9f9f9f}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="1800">
+  <title>Dagsins rættur á Glasi</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      overflow: hidden;
+    }
+
+    header {
+      position: absolute;
+      top: 54px;
+      left: 66px;
+      right: 66px;
+      height: 150px;
+    }
+
+    .title-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 74px;
+      line-height: 0.95;
+      letter-spacing: -2px;
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      color: #d6d6d6;
+      font-size: 29px;
+    }
+
+    .clock {
+      position: absolute;
+      top: 18px;
+      right: 0;
+      color: #ffffff;
+      font-size: 24px;
+      white-space: nowrap;
+    }
+
+    .card {
+      position: absolute;
+      top: 240px;
+      left: 66px;
+      right: 66px;
+      bottom: 82px;
+      overflow: hidden;
+      background: #111111;
+      border: 4px solid #ffffff;
+      border-radius: 28px;
+    }
+
+    .center-table {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .center-cell {
+      display: table-cell;
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      text-align: center;
+      padding: 40px 70px;
+    }
+
+    .day-row {
+      margin: 0 0 42px 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 16px 28px;
+      margin-right: 22px;
+      border-radius: 32px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .day {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      color: #ffffff;
+      font-size: 66px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .dish {
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      color: #ffffff;
+      font-size: 84px;
+      font-weight: bold;
+      line-height: 1.08;
+      letter-spacing: -1px;
+      text-align: center;
+      word-break: normal;
+    }
+
+    .error {
+      color: #ffffff;
+      font-size: 42px;
+      font-weight: bold;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .suberror {
+      margin-top: 18px;
+      color: #bfbfbf;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    footer {
+      position: absolute;
+      left: 66px;
+      right: 66px;
+      bottom: 48px;
+      height: 24px;
+      color: #bfbfbf;
+      font-size: 17px;
+    }
+
+    #status {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      color: #9f9f9f;
+    }
+
+    #updated {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: #bfbfbf;
+    }
+  </style>
 </head>
+
 <body>
-<main>
-<header>
-<div>
-<h1>Dagsins rættur</h1>
-<div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
-</div>
-<div class="clock"><span id="dateText"></span><span> | </span><strong id="timeText"></strong></div>
-</header>
-<section class="card" id="content"><div class="content"><div class="error">Lesur matskránna…</div></div></section>
-<footer><span id="status"></span><span id="updated"></span></footer>
-</main>
-<script>
-(function(){
-var weekdays={1:"Mánadag",2:"Týsdag",3:"Mikudag",4:"Hósdag",5:"Fríggjadag"};
-var retryDelay=30000;
-var refreshDelay=15*60*1000;
-var requestTimeout=12000;
-var retryTimer=null;
-var refreshTimer=null;
-var storageKey="glasir-menu-cache-dagurin-black-v1";
+  <div class="stage">
 
-function twoDigits(number){return number<10?"0"+number:""+number}
+    <header>
+      <div class="title-block">
+        <h1>Dagsins rættur</h1>
+        <div class="subtitle">Døgurði frá kl. 11:15 til 12:30</div>
+      </div>
 
-function escapeHtml(value){
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#39;");
-}
+      <div class="clock">
+        <span id="dateText"></span>
+        <span> | </span>
+        <strong id="timeText"></strong>
+      </div>
+    </header>
 
-function updateClock(){
-var now=new Date();
-var wd=["sunnudagur","mánadagur","týsdagur","mikudagur","hósdagur","fríggjadagur","leygardagur"];
-var mo=["januar","februar","mars","apríl","mai","juni","juli","august","september","oktober","november","desember"];
-document.getElementById("dateText").innerHTML=wd[now.getDay()]+" "+now.getDate()+". "+mo[now.getMonth()];
-document.getElementById("timeText").innerHTML=twoDigits(now.getHours())+"."+twoDigits(now.getMinutes());
-}
+    <section class="card" id="content">
+      <div class="center-table">
+        <div class="center-cell">
+          <div class="error">Lesur matskránna…</div>
+        </div>
+      </div>
+    </section>
 
-function formatDate(value){
-var d=new Date(value);
-if(isNaN(d.getTime())){return String(value)}
-return twoDigits(d.getDate())+"."+twoDigits(d.getMonth()+1)+"."+d.getFullYear()+" kl. "+twoDigits(d.getHours())+"."+twoDigits(d.getMinutes());
-}
+    <footer>
+      <span id="status"></span>
+      <span id="updated"></span>
+    </footer>
 
-function setStatus(text){document.getElementById("status").innerHTML=escapeHtml(text||"")}
+  </div>
 
-function renderContent(dayName,dishText){
-document.getElementById("content").innerHTML=
-'<div class="content">'+
-'<div class="day-row"><span class="badge">Í DAG</span><h2 class="day">'+escapeHtml(dayName)+'</h2></div>'+
-'<p class="dish">'+escapeHtml(dishText)+'</p>'+
-'</div>';
-}
+  <script>
+    (function () {
+      var weekdays = {
+        1: "Mánadag",
+        2: "Týsdag",
+        3: "Mikudag",
+        4: "Hósdag",
+        5: "Fríggjadag"
+      };
 
-function renderError(message,detail){
-document.getElementById("content").innerHTML=
-'<div class="content"><div class="error">'+escapeHtml(message)+
-'<div class="suberror">'+escapeHtml(detail||"")+'</div></div></div>';
-}
+      var retryDelay = 30000;
+      var refreshDelay = 15 * 60 * 1000;
+      var requestTimeout = 12000;
+      var retryTimer = null;
+      var refreshTimer = null;
+      var storageKey = "glasir-menu-cache-dagurin-black-portrait-v1";
 
-function renderMenu(data,fromCache){
-if(!data||!data.days||!data.days.length){throw new Error("Ógildug menu.json")}
-var todayName=weekdays[new Date().getDay()];
-var dishText="Eingin rættur er skrásettur";
-var item=null;
-var i;
+      function twoDigits(number) {
+        return number < 10 ? "0" + number : "" + number;
+      }
 
-if(!todayName){
-renderContent("Vikuskifti","Eingin matskrá er í dag");
-}else{
-for(i=0;i<data.days.length;i++){
-if(data.days[i].day===todayName){item=data.days[i];break}
-}
-if(item&&item.dish){dishText=item.dish}
-renderContent(todayName,dishText);
-}
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
 
-document.getElementById("updated").innerHTML=
-data.updated_at?"Dagført "+escapeHtml(formatDate(data.updated_at)):"";
+      function updateClock() {
+        var now = new Date();
 
-setStatus(fromCache?"Vísir seinast goymdu matskrá":"");
-}
+        var weekDayNames = [
+          "sunnudagur",
+          "mánadagur",
+          "týsdagur",
+          "mikudagur",
+          "hósdagur",
+          "fríggjadagur",
+          "leygardagur"
+        ];
 
-function saveCache(data){
-try{localStorage.setItem(storageKey,JSON.stringify(data))}catch(error){}
-}
+        var monthNames = [
+          "januar",
+          "februar",
+          "mars",
+          "apríl",
+          "mai",
+          "juni",
+          "juli",
+          "august",
+          "september",
+          "oktober",
+          "november",
+          "desember"
+        ];
 
-function loadCache(){
-try{
-var cached=localStorage.getItem(storageKey);
-return cached?JSON.parse(cached):null;
-}catch(error){return null}
-}
+        document.getElementById("dateText").innerHTML =
+          weekDayNames[now.getDay()] + " " +
+          now.getDate() + ". " +
+          monthNames[now.getMonth()];
 
-function scheduleRetry(){
-if(retryTimer){clearTimeout(retryTimer)}
-retryTimer=setTimeout(loadMenu,retryDelay);
-}
+        document.getElementById("timeText").innerHTML =
+          twoDigits(now.getHours()) + "." +
+          twoDigits(now.getMinutes());
+      }
 
-function scheduleRefresh(){
-if(refreshTimer){clearTimeout(refreshTimer)}
-refreshTimer=setTimeout(loadMenu,refreshDelay);
-}
+      function formatDate(value) {
+        var date = new Date(value);
 
-function handleFailure(){
-var cached=loadCache();
-if(cached){
-try{
-renderMenu(cached,true);
-setStatus("Samband fekst ikki – roynir aftur");
-}catch(error){
-renderError("Matskráin fekst ikki fram.","Roynir aftur um 30 sekund.");
-}
-}else{
-renderError("Matskráin fekst ikki fram.","Roynir aftur um 30 sekund.");
-}
-scheduleRetry();
-}
+        if (isNaN(date.getTime())) {
+          return String(value);
+        }
 
-function loadMenu(){
-var request=new XMLHttpRequest();
-var finished=false;
-setStatus("Dagførir…");
-request.open("GET","menu.json?v="+new Date().getTime(),true);
-request.timeout=requestTimeout;
+        return (
+          twoDigits(date.getDate()) + "." +
+          twoDigits(date.getMonth() + 1) + "." +
+          date.getFullYear() +
+          " kl. " +
+          twoDigits(date.getHours()) + "." +
+          twoDigits(date.getMinutes())
+        );
+      }
 
-request.onreadystatechange=function(){
-if(request.readyState!==4||finished){return}
-finished=true;
-if(request.status>=200&&request.status<300){
-try{
-var data=JSON.parse(request.responseText);
-renderMenu(data,false);
-saveCache(data);
-scheduleRefresh();
-}catch(error){handleFailure()}
-}else{handleFailure()}
-};
+      function setStatus(text) {
+        document.getElementById("status").innerHTML =
+          escapeHtml(text || "");
+      }
 
-request.onerror=function(){
-if(!finished){finished=true;handleFailure()}
-};
+      function renderContent(dayName, dishText) {
+        document.getElementById("content").innerHTML =
+          '<div class="center-table">' +
+            '<div class="center-cell">' +
+              '<div class="day-row">' +
+                '<span class="badge">Í DAG</span>' +
+                '<h2 class="day">' + escapeHtml(dayName) + '</h2>' +
+              '</div>' +
+              '<p class="dish">' + escapeHtml(dishText) + '</p>' +
+            '</div>' +
+          '</div>';
+      }
 
-request.ontimeout=function(){
-if(!finished){finished=true;handleFailure()}
-};
+      function renderError(message, detail) {
+        document.getElementById("content").innerHTML =
+          '<div class="center-table">' +
+            '<div class="center-cell">' +
+              '<div class="error">' +
+                escapeHtml(message) +
+                '<div class="suberror">' +
+                  escapeHtml(detail || "") +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }
 
-try{request.send()}catch(error){
-if(!finished){finished=true;handleFailure()}
-}
-}
+      function renderMenu(data, fromCache) {
+        if (!data || !data.days || !data.days.length) {
+          throw new Error("Ógildug menu.json");
+        }
 
-updateClock();
-setInterval(updateClock,30000);
+        var todayName = weekdays[new Date().getDay()];
+        var dishText = "Eingin rættur er skrásettur";
+        var item = null;
+        var i;
 
-var cached=loadCache();
-if(cached){
-try{renderMenu(cached,true)}catch(error){}
-}
-loadMenu();
-}());
-</script>
+        if (!todayName) {
+          renderContent("Vikuskifti", "Eingin matskrá er í dag");
+        } else {
+          for (i = 0; i < data.days.length; i++) {
+            if (data.days[i].day === todayName) {
+              item = data.days[i];
+              break;
+            }
+          }
+
+          if (item && item.dish) {
+            dishText = item.dish;
+          }
+
+          renderContent(todayName, dishText);
+        }
+
+        document.getElementById("updated").innerHTML =
+          data.updated_at
+            ? "Dagført " + escapeHtml(formatDate(data.updated_at))
+            : "";
+
+        setStatus(fromCache ? "Vísir seinast goymdu matskrá" : "");
+      }
+
+      function saveCache(data) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(data));
+        } catch (error) {
+        }
+      }
+
+      function loadCache() {
+        try {
+          var cached = localStorage.getItem(storageKey);
+          return cached ? JSON.parse(cached) : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function scheduleRetry() {
+        if (retryTimer) {
+          clearTimeout(retryTimer);
+        }
+
+        retryTimer = setTimeout(loadMenu, retryDelay);
+      }
+
+      function scheduleRefresh() {
+        if (refreshTimer) {
+          clearTimeout(refreshTimer);
+        }
+
+        refreshTimer = setTimeout(loadMenu, refreshDelay);
+      }
+
+      function handleFailure() {
+        var cached = loadCache();
+
+        if (cached) {
+          try {
+            renderMenu(cached, true);
+            setStatus("Samband fekst ikki – roynir aftur");
+          } catch (error) {
+            renderError(
+              "Matskráin fekst ikki fram.",
+              "Roynir aftur um 30 sekund."
+            );
+          }
+        } else {
+          renderError(
+            "Matskráin fekst ikki fram.",
+            "Roynir aftur um 30 sekund."
+          );
+        }
+
+        scheduleRetry();
+      }
+
+      function loadMenu() {
+        var request = new XMLHttpRequest();
+        var finished = false;
+
+        setStatus("Dagførir…");
+
+        request.open(
+          "GET",
+          "menu.json?v=" + new Date().getTime(),
+          true
+        );
+
+        request.timeout = requestTimeout;
+
+        request.onreadystatechange = function () {
+          if (request.readyState !== 4 || finished) {
+            return;
+          }
+
+          finished = true;
+
+          if (request.status >= 200 && request.status < 300) {
+            try {
+              var data = JSON.parse(request.responseText);
+              renderMenu(data, false);
+              saveCache(data);
+              scheduleRefresh();
+            } catch (error) {
+              handleFailure();
+            }
+          } else {
+            handleFailure();
+          }
+        };
+
+        request.onerror = function () {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        };
+
+        request.ontimeout = function () {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        };
+
+        try {
+          request.send();
+        } catch (error) {
+          if (!finished) {
+            finished = true;
+            handleFailure();
+          }
+        }
+      }
+
+      updateClock();
+      setInterval(updateClock, 30000);
+
+      var cached = loadCache();
+
+      if (cached) {
+        try {
+          renderMenu(cached, true);
+        } catch (error) {
+        }
+      }
+
+      loadMenu();
+    }());
+  </script>
 </body>
 </html>
