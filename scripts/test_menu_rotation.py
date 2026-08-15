@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import re
 import shutil
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
+
+import requests
+from bs4 import BeautifulSoup, Tag
+
+SOURCE = "https://www.glasir.fo/um-skulan/kantinan-a-glasi/"
+DAYS = ["Mánadag", "Týsdag", "Mikudag", "Hósdag", "Fríggjadag"]
 
 FAROE_TZ = ZoneInfo("Atlantic/Faroe")
 FRIDAY_NEXT_HOUR = 13
@@ -13,6 +20,87 @@ ROOT = Path(__file__).resolve().parents[1]
 TEST_DIR = ROOT / "test-output"
 CURRENT = TEST_DIR / "menu.json"
 NEXT = TEST_DIR / "menu-next.json"
+
+
+def clean(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def find_day_heading(soup: BeautifulSoup, day: str):
+    for heading in soup.find_all(re.compile(r"^h[1-6]$")):
+        if clean(heading.get_text(" ", strip=True)).casefold() == day.casefold():
+            return heading
+    return None
+
+
+def extract_dish(heading: Tag) -> str:
+    parts = []
+
+    for node in heading.next_siblings:
+        if isinstance(node, Tag) and re.fullmatch(r"h[1-6]", node.name or ""):
+            break
+
+        if isinstance(node, Tag) and node.name in {"script", "style", "noscript"}:
+            continue
+
+        text = clean(
+            node.get_text(" ", strip=True)
+            if isinstance(node, Tag)
+            else str(node)
+        )
+
+        if text:
+            parts.append(text)
+
+    text = clean(" ".join(parts))
+    text = re.sub(r"\bDagsins rættur\b", "", text, flags=re.IGNORECASE)
+    return clean(text)
+
+
+def fetch_real_menu(now_local: datetime, scenario: str) -> dict:
+    response = requests.get(
+        SOURCE,
+        timeout=30,
+        headers={
+            "User-Agent":
+                "Glasir-Matskra-Test/1.0 (+https://www.glasir.fo/)"
+        },
+    )
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    result = []
+
+    for day in DAYS:
+        heading = find_day_heading(soup, day)
+
+        if heading is None:
+            raise RuntimeError(f"Fann ikki yvirskriftina: {day}")
+
+        dish = extract_dish(heading)
+
+        if not dish:
+            dish = "Eingin rættur er skrásettur"
+
+        result.append({
+            "day": day,
+            "dish": dish,
+        })
+
+    return {
+        "test": True,
+        "scenario": scenario,
+        "test_time": now_local.isoformat(),
+        "source": SOURCE,
+        "days": result,
+    }
+
+
+def write_json(path: Path, payload: dict) -> None:
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def output_path_for_time(now_local: datetime) -> Path:
@@ -37,11 +125,11 @@ def promote_next_menu(now_local: datetime) -> None:
 
     shutil.copyfile(NEXT, CURRENT)
     NEXT.unlink()
+
     print("Mánadagur: menu-next.json varð flutt til menu.json.")
 
 
 def scenario_time(name: str) -> datetime:
-    # Fastar testtíðir í føroyskari tíð.
     scenarios = {
         "friday_before_13": "2026-08-14T12:00:00+01:00",
         "friday_after_13": "2026-08-14T14:00:00+01:00",
@@ -54,21 +142,6 @@ def scenario_time(name: str) -> datetime:
         return datetime.now(FAROE_TZ)
 
     return datetime.fromisoformat(scenarios[name]).astimezone(FAROE_TZ)
-
-
-def make_payload(now_local: datetime, scenario: str) -> dict:
-    return {
-        "test": True,
-        "scenario": scenario,
-        "test_time": now_local.isoformat(),
-        "days": [
-            {"day": "Mánadag", "dish": "TEST mánadag"},
-            {"day": "Týsdag", "dish": "TEST týsdag"},
-            {"day": "Mikudag", "dish": "TEST mikudag"},
-            {"day": "Hósdag", "dish": "TEST hósdag"},
-            {"day": "Fríggjadag", "dish": "TEST fríggjadag"},
-        ],
-    }
 
 
 def main() -> None:
@@ -102,18 +175,17 @@ def main() -> None:
     print("Scenario:", args.scenario)
     print("Føroysk tíð:", now_local.isoformat())
 
-    # Mánadag skal fyrst flyta menu-next.json til menu.json.
+    # Mánadag: flyt fyrst komandi viku til menu.json.
     promote_next_menu(now_local)
 
-    payload = make_payload(now_local, args.scenario)
+    # Crawla veruligu matskránna frá Glasir.
+    payload = fetch_real_menu(now_local, args.scenario)
     output = output_path_for_time(now_local)
 
-    output.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    write_json(output, payload)
 
-    print("Skrivaði til:", output.relative_to(ROOT))
+    print("Veruliga Glasir-matskráin varð skrivað til:")
+    print(output.relative_to(ROOT))
 
     print("\nStøða eftir test:")
     print("menu.json:", "FINST" if CURRENT.exists() else "MANGLAR")
