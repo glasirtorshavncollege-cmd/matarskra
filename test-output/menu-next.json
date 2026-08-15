@@ -2,26 +2,27 @@
   "test": true,
   "scenario": "friday_after_13",
   "test_time": "2026-08-14T14:00:00+01:00",
+  "source": "https://www.glasir.fo/um-skulan/kantinan-a-glasi/",
   "days": [
     {
       "day": "Mánadag",
-      "dish": "TEST mánadag"
+      "dish": "Høsnalør við nudlum og sós"
     },
     {
       "day": "Týsdag",
-      "dish": "TEST týsdag"
+      "dish": "Fiskafrikadellir við eplum og smelt (glutenfríur valmøguleiki)"
     },
     {
       "day": "Mikudag",
-      "dish": "TEST mikudag"
+      "dish": "Wrap við kebab"
     },
     {
       "day": "Hósdag",
-      "dish": "TEST hósdag"
+      "dish": "Lasagnette"
     },
     {
       "day": "Fríggjadag",
-      "dish": "TEST fríggjadag"
+      "dish": "Griskar frikadellir við eplasalati og tzatziki (glutenfríur valmøguleiki)"
     }
   ]
 }
