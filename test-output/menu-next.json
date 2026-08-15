@@ -1,0 +1,27 @@
+{
+  "test": true,
+  "scenario": "friday_after_13",
+  "test_time": "2026-08-14T14:00:00+01:00",
+  "days": [
+    {
+      "day": "Mánadag",
+      "dish": "TEST mánadag"
+    },
+    {
+      "day": "Týsdag",
+      "dish": "TEST týsdag"
+    },
+    {
+      "day": "Mikudag",
+      "dish": "TEST mikudag"
+    },
+    {
+      "day": "Hósdag",
+      "dish": "TEST hósdag"
+    },
+    {
+      "day": "Fríggjadag",
+      "dish": "TEST fríggjadag"
+    }
+  ]
+}
