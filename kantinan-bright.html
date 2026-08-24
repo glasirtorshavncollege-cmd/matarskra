@@ -205,25 +205,36 @@
     .dish-box {
       position: absolute;
       top: 145px;
-      left: 24px;
-      right: 24px;
+      left: 18px;
+      right: 18px;
       bottom: 24px;
       display: table;
+      table-layout: fixed;
+      width: 304px;
+      overflow: hidden;
     }
 
     .dish-cell {
       display: table-cell;
       vertical-align: middle;
       text-align: center;
+      width: 304px;
+      overflow: hidden;
     }
 
     .dish {
+      display: block;
+      width: 100%;
+      max-width: 100%;
       margin: 0;
+      padding: 0;
       color: #073b31;
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 700;
-      line-height: 1.22;
+      line-height: 1.18;
+      white-space: normal;
       word-break: normal;
+      overflow-wrap: break-word;
     }
 
     .badge {
