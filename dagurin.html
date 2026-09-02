@@ -198,27 +198,6 @@
       overflow-wrap: break-word;
     }
 
-    footer {
-      position: absolute;
-      left: 50%;
-      bottom: 52px;
-      width: 500px;
-      margin-left: -250px;
-      min-height: 54px;
-      padding: 15px 24px;
-      border-radius: 14px;
-      background: rgba(244,249,235,0.96);
-      color: #315c48;
-      font-size: 22px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    #connectionStatus {
-      margin-right: 14px;
-      color: #76877f;
-    }
-
     .status {
       position: absolute;
       top: 560px;
@@ -263,10 +242,6 @@
         <div class="status"><span>Lesur matskránna…</span></div>
       </section>
 
-      <footer>
-        <span id="connectionStatus"></span>
-        <span id="updated"></span>
-      </footer>
     </main>
   </div>
 
@@ -338,7 +313,7 @@
       }
 
       function setConnectionStatus(text) {
-        document.getElementById("connectionStatus").innerHTML = escapeHtml(text || "");
+        return;
       }
 
       function showMessage(message) {
@@ -381,8 +356,6 @@
 
         if (!item) {
           showMessage("Eingin matskrá er fyri í dag");
-          document.getElementById("updated").innerHTML =
-            data.updated_at ? "Dagført " + escapeHtml(formatDate(data.updated_at)) : "";
           setConnectionStatus(fromCache ? "Vísir seinast goymdu matskrá" : "");
           return;
         }
@@ -402,13 +375,6 @@
               '</div>' +
             '</div>' +
           '</article>';
-
-        if (data.updated_at) {
-          document.getElementById("updated").innerHTML =
-            "Dagført " + escapeHtml(formatDate(data.updated_at));
-        } else {
-          document.getElementById("updated").innerHTML = "";
-        }
 
         setConnectionStatus(fromCache ? "Vísir seinast goymdu matskrá" : "");
 
