@@ -30,12 +30,12 @@
       background: #ffffff;
     }
 
-    /* Tizen 4-safe: beinleiðis bakgrundsmynd og verulig overlay-løg */
+    /* MagicINFO/Tizen 4-safe: beinleiðis bakgrundsmynd + vanlig overlay-løg */
     .photo {
       position: absolute;
       top: 0;
-      right: 0;
-      width: 46%;
+      left: 0;
+      width: 100%;
       height: 100%;
       background-image: url("kantina-photo.jpg");
       background-size: cover;
@@ -46,29 +46,14 @@
     .photo-wash {
       position: absolute;
       top: 0;
-      right: 0;
-      width: 46%;
-      height: 100%;
-      background: rgba(255,255,255,0.34);
-    }
-
-    .left-fade {
-      position: absolute;
-      top: 0;
       left: 0;
-      width: 66%;
+      width: 100%;
       height: 100%;
-      background: rgba(255,255,255,0.98);
+      background: rgba(255,255,255,0.83);
     }
 
-    .soft-middle {
-      position: absolute;
-      top: 0;
-      left: 54%;
-      width: 22%;
-      height: 100%;
-      background: rgba(255,255,255,0.72);
-    }
+    .left-fade,
+    .soft-middle { display: none; }
 
     main {
       position: relative;
@@ -79,75 +64,77 @@
 
     h1 {
       position: absolute;
-      top: 92px;
-      left: 54px;
+      top: 210px;
+      left: 68px;
       margin: 0;
       color: #004d3c;
-      font-size: 78px;
+      font-size: 112px;
       line-height: 0.96;
-      letter-spacing: -3px;
+      letter-spacing: -4px;
       font-weight: 700;
       white-space: nowrap;
     }
 
     .subtitle {
       position: absolute;
-      top: 205px;
-      left: 54px;
+      top: 350px;
+      left: 68px;
       color: #2f6d24;
-      font-size: 32px;
+      font-size: 44px;
       line-height: 1;
+      font-weight: 700;
       white-space: nowrap;
     }
 
     .clock {
       position: absolute;
       top: 52px;
-      right: 42px;
-      padding: 16px 21px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.94);
+      right: 68px;
+      padding: 24px 30px;
+      border: 2px solid rgba(79,143,51,0.55);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.95);
       color: #0d4537;
-      font-size: 20px;
+      font-size: 31px;
       white-space: nowrap;
       box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
     .card {
       position: absolute;
-      top: 500px;
-      left: 122px;
-      width: 829px;
-      height: 1120px;
-      background: rgba(255,255,255,0.97);
-      border: 3px solid rgba(0,0,0,0.05);
-      border-radius: 22px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.11);
+      top: 560px;
+      left: 68px;
+      width: 944px;
+      height: 1170px;
+      background: rgba(255,255,255,0.975);
+      border: 2px solid rgba(0,0,0,0.04);
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.10);
       overflow: visible;
     }
 
     .topline {
       position: absolute;
-      top: -3px;
-      left: -3px;
-      width: 829px;
+      top: -2px;
+      left: -2px;
+      width: 944px;
       height: 14px;
-      border-radius: 22px 22px 0 0;
+      border-radius: 28px 28px 0 0;
       background: #8abb45;
       z-index: 2;
     }
 
     .badge {
       position: absolute;
-      top: -38px;
+      top: -42px;
       left: 50%;
-      width: 180px;
-      margin-left: -90px;
-      padding: 14px 0 15px;
-      border-radius: 32px;
+      width: 198px;
+      margin-left: -99px;
+      padding: 17px 0 18px;
+      border-radius: 36px;
       background: #70ad2c;
       color: #ffffff;
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 700;
       line-height: 1;
       text-align: center;
@@ -158,41 +145,41 @@
 
     .day {
       position: absolute;
-      top: 125px;
-      left: 40px;
-      right: 40px;
+      top: 120px;
+      left: 45px;
+      right: 45px;
       margin: 0;
       text-align: center;
       color: #073b31;
-      font-size: 62px;
-      font-weight: 700;
+      font-size: 76px;
+      font-weight: 400;
       line-height: 1;
       white-space: nowrap;
     }
 
     .rule {
       position: absolute;
-      top: 270px;
-      left: 22%;
-      width: 56%;
+      top: 255px;
+      left: 16%;
+      width: 68%;
       height: 4px;
       background: #8abb45;
     }
 
     .dish-box {
       position: absolute;
-      top: 320px;
-      left: 72px;
-      width: 685px;
-      height: 690px;
+      top: 305px;
+      left: 68px;
+      width: 808px;
+      height: 770px;
       display: table;
       overflow: hidden;
     }
 
     .dish-cell {
       display: table-cell;
-      width: 685px;
-      height: 690px;
+      width: 808px;
+      height: 770px;
       vertical-align: middle;
       text-align: center;
       overflow: hidden;
@@ -201,11 +188,11 @@
     .dish {
       margin: 0 auto;
       width: 100%;
-      max-width: 685px;
+      max-width: 808px;
       color: #073b31;
-      font-size: 78px;
+      font-size: 108px;
       font-weight: 700;
-      line-height: 1.12;
+      line-height: 1.07;
       text-align: center;
       word-wrap: break-word;
       overflow-wrap: break-word;
@@ -213,31 +200,34 @@
 
     footer {
       position: absolute;
-      left: 205px;
-      bottom: 62px;
-      min-height: 48px;
-      padding: 13px 24px;
-      border-radius: 13px;
-      background: rgba(244,249,235,0.95);
+      left: 50%;
+      bottom: 52px;
+      width: 500px;
+      margin-left: -250px;
+      min-height: 54px;
+      padding: 15px 24px;
+      border-radius: 14px;
+      background: rgba(244,249,235,0.96);
       color: #315c48;
-      font-size: 19px;
+      font-size: 22px;
+      text-align: center;
       white-space: nowrap;
     }
 
     #connectionStatus {
-      margin-right: 16px;
+      margin-right: 14px;
       color: #76877f;
     }
 
     .status {
       position: absolute;
-      top: 500px;
-      left: 122px;
-      width: 829px;
-      height: 1120px;
+      top: 560px;
+      left: 68px;
+      width: 944px;
+      height: 1170px;
       display: table;
-      background: rgba(255,255,255,0.97);
-      border-radius: 22px;
+      background: rgba(255,255,255,0.975);
+      border-radius: 28px;
     }
 
     .status span {
@@ -245,7 +235,7 @@
       vertical-align: middle;
       text-align: center;
       color: #004d3c;
-      font-size: 42px;
+      font-size: 46px;
       font-weight: 700;
       padding: 50px;
     }
@@ -298,7 +288,7 @@
         5: "#4f8f33"
       };
 
-      var storageKey = "glasir-menu-cache-dagurin-bright-v1";
+      var storageKey = "glasir-menu-cache-dagurin-focus-final";
       var retryDelay = 30000;
       var refreshDelay = 15 * 60 * 1000;
       var requestTimeout = 12000;
@@ -359,8 +349,8 @@
       function fitDishText() {
         var dish = document.getElementById("dishText");
         var box = document.getElementById("dishBox");
-        var size = 78;
-        var minSize = 48;
+        var size = 108;
+        var minSize = 58;
 
         if (!dish || !box) return;
 
