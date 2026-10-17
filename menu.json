@@ -1,26 +1,26 @@
 {
   "source": "https://www.glasir.fo/um-skulan/kantinan-a-glasi/",
-  "updated_at": "2026-10-17T19:27:51Z",
+  "updated_at": "2026-10-17T22:22:37Z",
   "days": [
     {
       "day": "Mánadag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Karrybollar við rís"
     },
     {
       "day": "Týsdag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Lasagnette"
     },
     {
       "day": "Mikudag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Aspargessuppu og klár súpan við kjøt og mjølbollum"
     },
     {
       "day": "Hósdag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Gullash við eplamosi (glutenfríur valmøguleiki)"
     },
     {
       "day": "Fríggjadag",
-      "dish": "Eingin rættur er í dag"
+      "dish": "Hunangmarnerða svínaskinka við sós og eplum (glutenfríur valmøguleiki)"
     }
   ]
 }
